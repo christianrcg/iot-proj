@@ -39,7 +39,10 @@ module.exports = {
         'red-d': '#8B0021',
         'white-01': '#FCF8F8', //for white text
         'blue-d': '#31507F', //dark blue text
-      }	
+      },
+      fontFamily: {
+        'poppins': ['Poppins']
+      }
     },
   },
   plugins: [],

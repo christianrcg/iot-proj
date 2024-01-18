@@ -8,7 +8,7 @@
     <!-- Styling -->
     <link rel="stylesheet" href="../assets/style/landingpage.css">
     <link rel="stylesheet" href="../global.css">
-    <title>Document</title>
+    <title>HEO APP</title>
 </head>
 
 <body>
@@ -39,6 +39,7 @@
             
         </div>
     </div>
+
 </body>
 
 </html>

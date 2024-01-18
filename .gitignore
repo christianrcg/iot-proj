@@ -22,3 +22,6 @@ pids
 
 # VS Code
 .vscode
+
+#tailwind
+src/global.css

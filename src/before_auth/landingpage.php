@@ -3,26 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Styling -->
     <link rel="stylesheet" href="../assets/style/landingpage.css">
     <link rel="stylesheet" href="../global.css">
-    <title>Document</title>
+    <title>HEO APP</title>
 </head>
 
 <body>
     <div class="container">
         <div class="left">
-           <div class="left-content">
+            <div class="left-content">
 
                 <div class="image-container">
                     <img src="../assets/img/logo.png">
                 </div>
 
                 <div class="text-container">
-                    <label>Track and Save <br> Electricity  <strong style="font-weight: boldest;">Smartly</strong></label>
-                    <a href="../before_auth/loginpage.php">
+                    <label>Track and Save <br> Electricity  <strong style="font-weight: bold;">Smartly</strong></label>
+                    <a href="../before_auth/reg_loginpage.php">
                     <button >Let's get Started</button>
                     </a>
                 </div>
@@ -33,12 +33,13 @@
                     <img style="width: 7vh;" src="../assets/img/coin.png">
                 </div>
 
-           </div>
+            </div>
         </div>
         <div class="right">
             
         </div>
     </div>
+
 </body>
 
 </html>

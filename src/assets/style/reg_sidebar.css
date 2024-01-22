@@ -58,11 +58,11 @@ body {
 
 .links a:hover:not(.active) {
   text-align: center;
-  background-color: #c6ac5e;
+  background-color: #eec23c;
   color: rgb(0, 0, 0);
-
+  font-weight: bold;
   border-radius: 10px;
-  width: 200px;
+  width: 180px;
   justify-content: center;
   margin: auto;
 }
@@ -153,3 +153,4 @@ div.content {
     display: block;
   }
 }
+

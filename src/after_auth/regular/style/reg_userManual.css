@@ -1,0 +1,43 @@
+.manual{
+    height: 100vh;
+    width: 70vw;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.manual-text{
+    height: 15vh;
+    width: 1000px;
+    background-color: black;
+    border-color: aliceblue;
+    border-style: solid;
+    margin-top: 60px;
+}
+
+.manual-text h1{
+    color: aliceblue;
+    position: relative;
+    top: 5px;
+    left: 50px;
+}
+
+@media screen and (max-width: 700px) {
+    .manual-text h1{
+        color: aliceblue;
+        text-align: center;
+        position: relative;
+        top: 5px;
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .manual-text h1{
+        color: aliceblue;
+        text-align: center;
+        position: relative;
+        top: 5px;
+        left: 0;
+    }
+}

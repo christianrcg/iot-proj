@@ -2,13 +2,14 @@
     height: 100vh;
     width: 70vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin: auto;
 }
 
 .dashboard-text{
     height: 15vh;
-    width: 700px;
+    width: 1000px;
     background-color: black;
     border-color: aliceblue;
     border-style: solid;
@@ -22,7 +23,68 @@
     left: 50px;
 }
 
+
+/* GRID STYLE */
+.container {  
+    position: relative;
+    top: 40px;
+    width: 70vw;
+    height: 65vh;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr 1fr;
+    grid-template-rows: 0.6fr 1.6fr 0.8fr;
+    gap: 20px 20px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "header header header"
+      "electricity-comsumption bar-graph bar-graph"
+      "address-temperature electricity-rate monthly-consumption";
+  }
+  
+  .header { 
+    grid-area: header; 
+    border: solid 1px white;
+    border-radius: 10px;
+}
+  
+  .bar-graph { 
+    grid-area: bar-graph;
+    border: solid 1px white;
+    border-radius: 10px;
+}
+  
+  .electricity-rate { 
+    grid-area: electricity-rate; 
+    border: solid 1px white;
+    border-radius: 10px;
+}
+  
+  .monthly-consumption { 
+    grid-area: monthly-consumption; 
+    border: solid 1px white;
+    border-radius: 10px;
+}
+  
+  .address-temperature { 
+    grid-area: address-temperature; 
+    border: solid 1px white;
+    border-radius: 10px;
+}
+  
+  .electricity-comsumption {
+     grid-area: electricity-comsumption; 
+     border: solid 1px white;
+     border-radius: 10px;
+ }
+  
+
+
 @media screen and (max-width: 700px) {
+
+    .dashboard-text{
+       width: 500px;
+    }
+
     .dashboard-text h1{
         color: aliceblue;
         text-align: center;
@@ -30,9 +92,16 @@
         top: 5px;
         left: 0;
     }
+    
 }
 
 @media screen and (max-width: 400px) {
+
+    .dashboard-text{
+        width: 300px;
+     }
+ 
+
     .dashboard-text h1{
         color: aliceblue;
         text-align: center;

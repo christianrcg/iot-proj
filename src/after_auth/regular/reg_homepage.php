@@ -13,6 +13,16 @@
         <div class="dashboard-text">
             <h1>Dashboard</h1>
         </div>
+
+        <div class="container">
+            <div class="header"></div>
+            <div class="bar-graph"></div>
+            <div class="electricity-rate"></div>
+            <div class="monthly-consumption"></div>
+            <div class="address-temperature"></div>
+            <div class="electricity-comsumption"></div>
+        </div>
+
     </div>
 </body>
 

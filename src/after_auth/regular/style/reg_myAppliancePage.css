@@ -1,8 +1,8 @@
 .my-appliance{
-    height: 100vh;
+    height: 100%;
     width: 70vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     margin: auto;
 }
 
@@ -21,6 +21,14 @@
     top: 5px;
     left: 50px;
 }
+
+.my-appliance-table-container{
+    width: 70vw;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    color: white;
+  }
+
 
 @media screen and (max-width: 700px) {
     .my-appliance-text h1{
@@ -41,3 +49,151 @@
         left: 0;
     }
 }
+
+* {
+    box-sizing: border-box;
+  }
+
+  .header-utils{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #myInput {
+    background-color: #040018;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 20vw;
+    height: 50px;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #1d1e42;
+    font-size: 18px;
+  }
+
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 10px;
+  }
+
+  #myTable td {
+    font-weight: 200;
+  }
+
+  .search-box{
+    position: relative;
+  }
+
+  .search-box input{
+    color: white;
+    border-color: white;
+  }
+
+  .search-box i{
+    position: absolute;
+    color: rgb(253, 250, 250);
+    top: 18px;
+    left: 15px;
+  }
+
+  .header-utils button{
+    cursor: pointer;
+    border-radius: 30px;
+    height: 50px;
+    width: 200px;
+    background-color: #4f407a;
+    border-style: none;
+
+  }
+  .header-utils button:hover{
+    background-color: #3a2f56;
+  }
+
+  .table-header{
+    background-color: #1d1e42;
+    border-style: solid;
+    border-color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none ;
+  }
+  .table-header th{
+    font-size: 15px;
+    text-align: center;
+  }
+
+
+
+  /* SWITCH STYLING */
+
+  .switch-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .switch-label {
+    margin-right: 10px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .switch input {
+    display: none;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+ 
+  .action-container{
+    display: flex;
+  }
+
+  .action-container>*{
+    margin-right: 20px;
+    cursor: pointer;
+  }
+ 

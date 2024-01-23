@@ -13,6 +13,15 @@
         <div class="settings-text">
             <h1>Settings</h1>
         </div>
+
+        <div class="content-cont">
+            <section>
+
+            </section>
+            <section>
+                
+            </section>
+        </div>
     </div>
 </body>
 

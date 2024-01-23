@@ -1,3 +1,10 @@
+div.content {
+    margin-left: 300px;
+    padding: 1px 16px;
+    background-color: #09091c;
+    overflow-x: hidden;
+}
+
 .dashboard{
     height: 100vh;
     width: 70vw;
@@ -162,6 +169,10 @@
         display: none;
     }
     
+}
+
+@media screen and (max-width: 700px){
+    div.content {margin-left: 0;}
 }
 
 @media screen and (max-width: 400px) {

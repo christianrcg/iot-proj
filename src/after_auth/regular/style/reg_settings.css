@@ -4,6 +4,13 @@
     font-family: 'Poppins', sans-serif;
 }
 
+div.content {
+    margin-left: 300px;
+    padding: 1px 16px;
+    background-color: #09091c;
+    overflow-x: hidden;
+}
+
 .settings{
     height: 100vh;
     width: 70vw;
@@ -290,6 +297,7 @@ input:checked + .slider:before {
         top: 5px;
         left: 0;
     }
+    div.content {margin-left: 0;}
 }
 
 @media screen and (max-width: 400px) {

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="x-icon" href="../assets/img/icon.png">
 
     <!-- Styling -->
     <link rel="stylesheet" href="../assets/style/landingpage.css">

@@ -36,19 +36,21 @@
     height: 65vh;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr 1fr;
-    grid-template-rows: 0.4fr 1.6fr 0.8fr 0.8fr;
+    grid-template-rows: 0.4fr 1.6fr 0.8fr 0.8 0.8fr 0.8fr;
     gap: 15px 15px;
     grid-auto-flow: row;
     grid-template-areas:
       "header header header"
-      "electricity-comsumption bar-graph bar-graph"
+      "electricity-consumption bar-graph bar-graph"
+      "electricity-consumption bar-graph bar-graph"
+      "electricity-consumption bar-graph bar-graph"
       "address-temperature bar-graph bar-graph"
       "address-temperature electricity-rate monthly-consumption";
   }
   
   .header { 
     grid-area: header; 
-    border: solid 1px;
+    border: solid 1px #424242;
     border-radius: 10px;
     background-image: url(../../../assets/img/banner.png);
     background-repeat: no-repeat;
@@ -66,35 +68,35 @@
   
   .bar-graph { 
     grid-area: bar-graph;
-    border: solid 1px #141432;
+    border: solid 1px #424242;
     border-radius: 10px;
     background-color: #141432;
 }
   
   .electricity-rate { 
     grid-area: electricity-rate; 
-    border: solid 1px #141432;;
+    border: solid 1px #424242;
     border-radius: 10px;
     background-color: #141432;
 }
   
   .monthly-consumption { 
     grid-area: monthly-consumption; 
-    border: solid 1px #141432;;
+    border: solid 1px #424242;
     border-radius: 10px;
     background-color: #141432;
 }
   
   .address-temperature { 
     grid-area: address-temperature; 
-    border: solid 1px #141432;;
+    border: solid 1px #424242;
     border-radius: 10px;
     background-color: #141432;
 }
   
-  .electricity-comsumption {
-     grid-area: electricity-comsumption; 
-     border: solid 1px #141432;;
+  .electricity-consumption {
+     grid-area: electricity-consumption; 
+     border: solid 1px #424242;
      border-radius: 10px;
      background-color: #141432;
  }
@@ -129,7 +131,7 @@
         grid-template-rows: 1fr 2fr 4fr 2fr 2fr 2fr;
         grid-template-areas: 
           "header"
-          "electricity-comsumption"
+          "electricity-consumption"
           "bar-graph"
           "address-temperature"
           "electricity-rate"
@@ -178,4 +180,300 @@
         left: 0;
         display: none;
     }
+}
+
+
+
+/* ELECTRICITY CONSUMPTION STYLE */
+
+.electricity-consumption{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.electricity-consumption-header{
+    display: flex;
+    align-items: center;
+    width: 347.138px;
+    height: 100px;
+    justify-content: space-between;
+
+}
+
+
+.electricity-consumption-header i{
+    position: relative;
+    left: 40px;
+}
+
+.electricity-consumption-header-text{
+    margin-left: 20px;
+    text-align: center;
+    color: white;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.electricity-consumption-header-text p{
+    color: #9586c0;
+    font-style: italic;
+}
+
+
+/* PER MINUTE */
+
+.per-minute-content{
+    width: 150px;
+    display: flex;
+    align-items: center;
+    background-color: #2d313b;
+}
+
+.per-minute{
+    display: flex;
+    border: solid 1px #8e8d8d;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 250px;
+    height: 30px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.watts{
+    color: white;
+    font-size: 7px;
+    width: 40px;
+    margin-left: 10px;
+}
+
+.cost{
+    display: flex;
+    justify-content: space-between;
+    width: 85px;
+    color: white;
+    font-size: 7px;
+}
+
+.cost h2{
+    color: #9586c0;
+}
+
+.minute-label{
+    display: flex;
+    width: 100px;
+    border-style:ridge;
+    border-color: #141432;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #4f407a;
+}
+
+.minute-label label{
+    color: white;
+    margin: auto;
+    font-style: italic;
+    font-size: 10px;
+}
+
+/* PER HOUR */
+
+.per-hour-content{
+    width: 150px;
+    display: flex;
+    align-items: center;
+    background-color: #2d313b;
+}
+
+
+.per-hour{
+    display: flex;
+    border: solid 1px #8e8d8d;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 250px;
+    height: 30px;
+    margin: auto;
+}
+
+.hour-label{
+    display: flex;
+    width: 100px;
+    border-style:ridge;
+    border-color: #141432;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #4f407a;
+}
+
+.hour-label label{
+    color: white;
+    margin: auto;
+    font-style: italic;
+    font-size: 10px;
+}
+
+.electricity-consumption-prediction{
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.electricity-consumption-prediction p{
+    font-size: 10px;
+    font-weight: lighter;
+    color: white;
+}
+
+.cost-computed{
+    display: flex;
+    
+}
+.cost-computed h2{
+    font-size: 10px;
+    color: white;
+}
+
+/* ADDRESS TEMPERATURE */
+
+.address-temperature-location{
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.address-temperature-location i{
+    margin-left: 60px;
+
+}
+
+.address-location-text{
+    color: white;
+    text-align: center;
+}
+.address-location-text h1{
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+.address-location-text p{
+    font-size: 10px;
+    color: #9586c0;
+}
+
+.address-temperature-degree{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 300px;
+    color: white;
+}
+.address-temperature-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.address-temperature-text h1{
+    font-size: 10px;
+    font-style: italic;
+}
+
+.address-temp{
+    display: flex;
+    width: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.address-temp h1{
+    font-size: 10px;
+}
+.address-temp p{
+    font-size: 10px;
+}
+
+.icon-container{
+    margin-left: 55px;
+    display: flex;
+    width: 80px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-container h1{
+    text-align: center;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+/* ELECTRICITY RATE */
+
+.electricity-rate{
+    display: flex;
+    justify-content: center;
+}
+
+.electricity-rate-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 280px;
+    margin-left: 20px;
+}
+
+.electricity-rate-text{
+    margin-left: 20px;
+}
+
+.electricity-rate-text h1{
+    font-size: 15px;
+    color: #9586c0;
+}
+.electricity-rate-text p{
+    font-size: 13px;
+    font-weight: 100;
+    color: white;
+}
+
+
+/* MONTHLY CONSUMPTION */
+
+.monthly-consumption-text {
+    display: flex;
+    width: 300px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.monthly-consumption-text>*{
+    margin-left: 35px;
+}
+
+.monthly-consumption-text h3{
+    font-size: 14px;
+    color: white;
+    font-weight: 100;
+}
+
+.monthly-consumption-input{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 5px;
+}
+
+.monthly-consumption-input h3{
+    color: #9586c0;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+.input-group{
+    height: 40px;
+}
+
+.input-group input{
+    width: 120px;
+    height: 20px;
+    border: none;
 }

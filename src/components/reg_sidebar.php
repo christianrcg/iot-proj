@@ -32,24 +32,35 @@ session_start();
   <script>
     $(document).ready(function() {
       $("#home").click(function() {
+        event.preventDefault();
         $("#content").load("../after_auth/regular/reg_homepage.php")
       });
       $("#appliance").click(function() {
+        event.preventDefault();
         $("#content").load("../after_auth/regular/reg_myAppliancePage.php")
       });
       $("#settings").click(function() {
+        event.preventDefault();
         $("#content").load("../after_auth/regular/reg_settings.php")
       });
       $("#notification").click(function() {
+        event.preventDefault();
         $("#content").load("../after_auth/regular/reg_notification.php")
       });
       $("#manual").click(function() {
+        event.preventDefault();
         $("#content").load("../after_auth/regular/reg_userManual.php")
       });
     });
   </script>
 
   <title>HEO APP</title>
+
+  <!-- debug -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 </head>
 

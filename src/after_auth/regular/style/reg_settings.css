@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
 .settings{
     height: 100vh;
     width: 70vw;
@@ -20,6 +26,223 @@
     position: relative;
     top: 5px;
     left: 50px;
+}
+
+/* cont layout */
+.content-cont{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    min-width: 100%;
+    margin-top: 1rem;
+}
+
+.section-cont{
+    width: 100%;
+}
+
+.section-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-body{
+    max-width: 100%;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background-color: #141432;
+}
+
+.input-span{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.input-span-col{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 10px;
+}
+
+.input-cont{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    min-width: 40%;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px;
+    background-color: #161616;
+    border-radius: 8px;
+    border: 2px solid #646464;
+}
+
+.notif-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-cont{
+    display: flex;
+    gap: 10px;
+}
+
+/* child elements */
+.btn-header{
+  background: none;
+  color: aliceblue;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.btn-header a{
+    text-decoration: none;
+    color: #efc135;
+}
+
+.btn-header:nth-child(1){
+    color: #efc135;
+    border: 1px solid #efc135;
+}
+.btn-header:nth-child(2){
+    color: #8b0021;
+    border: 1px solid #8b0021;
+}
+
+.btn-header:hover{
+    animation: ease;
+    background-color: #000000;
+    box-shadow: 0px 2px 4px rgba(255,255,255, .5);
+    border: 1px;
+}
+
+.section-header p{
+    font-weight: 600;
+    font-size: x-large;
+    color: aliceblue;
+}
+
+.input-cont label{
+    font-weight: 400;
+    color: aliceblue;
+    font-size: large;
+}
+
+.input-group i, .input-group input{
+    background-color: #161616;
+    color: aliceblue;
+}
+
+.edit-btn{
+    background-color: #161616;
+}
+
+#save-pass-btn{
+    padding: 10px;
+    border-radius: 10px;
+    color: aliceblue;
+    font-weight: 600;
+    background-color: #4F407A;
+}
+#save-pass-btn:hover{
+    color: #040018;
+    background-color: #A598F6;
+
+    animation: ease;
+}
+.switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.switch input {
+    display:none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #A598F6;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color:#4F407A;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+  
+/* utils */
+.space-bw{
+    justify-content: space-between;
+}
+
+.flex-end{
+    justify-content: flex-end;
+}
+
+.flex-start{
+    justify-content: flex-start;
+}
+
+.mb-m{
+    margin-bottom: 1.5rem;
+}
+
+.b-sdw{
+    box-shadow: 0px 4px 4px rgba(0,0,0, .5);
+}
+
+.divider{
+    width: 100%;
+    height: 2px;
+    background-color: #323232;
 }
 
 @media screen and (max-width: 700px) {

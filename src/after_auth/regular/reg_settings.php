@@ -1,7 +1,7 @@
 <?php
 require_once('../../functions/database/db_connect.php');
 session_start();
-include_once '../../components/reg_sidebar.php';
+include '../../components/reg_sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -168,7 +168,7 @@ include_once '../../components/reg_sidebar.php';
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
-        mapboxgl.accessToken = 'ACCESS_TOKEN=pk.eyJ1IjoiY2hyaXN0aWFucmNnIiwiYSI6ImNscnB0cm4zcjAyNGsyaW82azE2enRzNnIifQ.1tslu_DCtxUEfkfsvDLj5w';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXN0aWFucmNnIiwiYSI6ImNscnB0cm4zcjAyNGsyaW82azE2enRzNnIifQ.1tslu_DCtxUEfkfsvDLj5w';
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
             types: 'country,region,place,postcode,locality,neighborhood',

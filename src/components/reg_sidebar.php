@@ -7,7 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../assets/style/reg_sidebar.css">
 
-  <title>HEO APP</title>
+  <!-- browser site icon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/browser-icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/browser-icon/favicon-16x16.png">
+  <link rel="manifest" href="../../assets/img/browser-icon/site.webmanifest">
 
 </head>
 
@@ -41,7 +44,7 @@
         <span class="separator">/</span>
         <p></p>
 
-        <a href="reg_userManual">User Manual</a>
+        <a href="reg_userManual.php">User Manual</a>
 
         <p></p>
       </div>

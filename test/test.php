@@ -1,89 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST</title>
-
+    <meta charset="utf-8">
+    <title>Use the geocoder without a map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
     <style>
-        /* The switch - the box around the slider */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
+        body {
+            margin: 0;
+            padding: 0;
         }
 
-        /* Hide default HTML checkbox */
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        /* The slider */
-        .slider {
+        #map {
             position: absolute;
-            cursor: pointer;
             top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked+.slider {
-            background-color: #2196F3;
-        }
-
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked+.slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
-    <!-- Rounded switch -->
-    <label class="switch">
-        <input type="checkbox" onclick="clicked()">
-        <span class="slider round"></span>
-    </label>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+    <style>
+        #geocoder {
+            z-index: 1;
+            margin: 20px;
+        }
+
+        .mapboxgl-ctrl-geocoder {
+            min-width: 100%;
+        }
+    </style>
+
+    <div id="geocoder"></div>
+    <pre id="result"></pre>
 
     <script>
-        function clicked() {
-            alert('clicked');
-        }
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXN0aWFucmNnIiwiYSI6ImNscnByM2p2MzA4dGYybG5qMHVvcHhkaWQifQ.Gp4Rb6sDfCVbBVDJyvrkfw';
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            types: 'country,region,place,postcode,locality,neighborhood',
+        });
+
+        geocoder.addTo('#geocoder');
+
+        // Get the geocoder results container.
+        const results = document.getElementById('result');
+
+        // Add geocoder result to container.
+        geocoder.on('result', (e) => {
+            results.innerText = JSON.stringify(e.result, null, 2);
+        });
+
+        // Clear results container when search is cleared.
+        geocoder.on('clear', () => {
+            results.innerText = '';
+        });
     </script>
+
 </body>
 
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../regular/style/reg_homepage.css">
-    <title>Regular Homepage</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -15,12 +15,20 @@
         </div>
 
         <div class="container">
-            <div class="header"></div>
+            <div class="header">
+                <h1>Hello User!</h1>
+                <p>welcome to your home electricity saver app</p>
+            </div>
             <div class="bar-graph"></div>
             <div class="electricity-rate"></div>
             <div class="monthly-consumption"></div>
             <div class="address-temperature"></div>
             <div class="electricity-comsumption"></div>
+        </div>
+        
+        <div class="not-available">
+            <h1>"This Breakpoint is Under Development"</h1>
+            <p>Please use the desktop mode for content availability!</p>
         </div>
 
     </div>

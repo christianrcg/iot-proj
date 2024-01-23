@@ -1,9 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* For WebKit Browsers */
+::-webkit-scrollbar {
+  width: 12px; /* width of the scrollbar */
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* color of the thumb */
+  border-radius: 6px; /* rounded corners of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the thumb on hover */
+}
 
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
+  background-color: #09091c;
 }
 
 .logo-container{
@@ -37,28 +56,33 @@ body {
 .sidebar-content{
   margin-top: 100px;
 }
-
+  
 .links a {
   display: block;
-  color: rgb(252, 249, 249);
+  color: rgb(255, 255, 255);
   padding: 16px;
   text-decoration: none;
   text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: smaller;
 }
 
 .links p{
   justify-content: center;
   margin: auto;
-  background-color: aliceblue;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
   height: 2px;
   width: 180px;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
  
 
 .links a:hover:not(.active) {
   text-align: center;
-  background-color: #eec23c;
+  background-color: #f0d174;
   color: rgb(0, 0, 0);
   font-weight: bold;
   border-radius: 10px;
@@ -72,7 +96,7 @@ body {
 div.content {
   margin-left: 300px;
   padding: 1px 16px;
-  background-color: #141432;
+  background-color: #09091c;
   overflow-x: hidden;
 }
 

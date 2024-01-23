@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+html, body{
+    height: 100%;
+}
+/* layout classes */
+.main-cont{
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.section-cont{
+    min-width: 50%;
+    height: 100%;
+    background: #040018;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 5px blue; */
+}
+
+.section-cont:nth-child(2){
+    min-width: 50%;
+    height: 100%;
+    background: #1C1F34;
+}
+
+.section-content{
+    min-width: 50%;
+    background: #EFC135;
+    padding: 3rem;
+    border-radius: 8px;
+}
+
+.input-cont{
+    display: flex;
+    min-width: 90%;
+    margin-inline: 2rem;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* child elements styling */
+.input-cont input{
+    width: 65%;
+    min-width: 100px;
+    border-radius: 4px;
+    border: 1px solid white;   
+}
+
+.btn-main{
+    text-transform: uppercase;
+    font-size: large;
+    font-weight: 600;
+    color: white;
+    padding: 5px;
+    background: black;
+    border-radius: 12px;
+    min-width: 70%;
+}
+
+.btn-main:hover, .btn-main:active{
+    background: #141432;
+}
+
+.input-cont p, a{
+    font-style: italic;
+    text-decoration: none;
+}
+
+.forgot-password {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
+    font-size: small;
+}
+
+/* utils */
+.mb-zero{
+    margin-bottom: 0;
+}
+
+.mb-s{
+    margin-bottom: 1.5rem;
+}
+
+.center{
+    justify-content: center;
+}
+
+.box-shadow{
+    box-shadow: 0px 4px 4px rgba(0,0,0, .3);
+}
+
+@media only screen and (max-width: 768px) {
+    .main-cont{
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 100%;
+        background: #1C1F34;
+    }
+    
+    .section-cont:nth-child(1){
+        height: 20%;
+        min-width: 100%;
+        justify-content:center;
+        align-items: center;
+    }
+    .section-cont img {
+        max-height: 10vh;
+    }
+    .section-cont:nth-child(2){
+        align-items: flex-start;
+        height: 60%;
+        width: 100%;
+        margin: 1rem 1.5rem auto;
+    }
+}
+
+
+@media only screen and (max-width: 360px) {
+    .input-cont{
+        border: white;
+        flex-wrap: wrap;
+    }
+    .forgot-password{
+        justify-content: start;
+    }
+}

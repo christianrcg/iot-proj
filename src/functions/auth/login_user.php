@@ -23,7 +23,6 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-                $_SESSION['user_location'] = $user['user_location'];
 
                 $res = [
                     'status' => 200,

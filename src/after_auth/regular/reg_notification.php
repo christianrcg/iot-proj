@@ -25,40 +25,41 @@ include_once '../../components/reg_sidebar.php';
             <div class="notification-text">
                 <h1>Notification</h1>
             </div>
-
-            <div class="card-container">
-
-                <div class="notification-appliance-card">
-
-                    <div class="notification-message">
-                        <h3>An appliance is Successsfully added</h3>
-                    </div>
-
-                    <div class="close-icon">
-                        <h1>|</h1>
-                        <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
-                    </div>
-
+            <div class="notifs-cont">
+                <div class="notif-card">
+                    <span class="notif-header">
+                        <p class="notif-title">An appliance is Successsfully added</p>
+                        <button class="view_btn">
+                            View
+                        </button>
+                        <p>|</p>
+                        <button>
+                            <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
+                        </button>
+                    </span>
+                    <span class="notif-details">
+                        <p>details</p>
+                    </span>
                 </div>
-
-                <div class="notification-exceed-card">
-
-                    <div class="notification-message">
-                        <h3>Electricity consumption Exceed the set monthly budget!</h3>
-                    </div>
-
-                    <div class="close-icon">
-                        <h1>|</h1>
-                        <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
-                    </div>
-
+                <div class="notif-card">
+                    <span class="notif-header">
+                        <p class="notif-title">An appliance is Successsfully added</p>
+                        <button class="view_btn">
+                            View
+                        </button>
+                        <p>|</p>
+                        <button>
+                            <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff;"></i>
+                        </button>
+                    </span>
+                    <span class="notif-details">
+                        <p>details</p>
+                    </span>
                 </div>
-
             </div>
 
         </div>
     </div>
-
 </body>
 
 </html>

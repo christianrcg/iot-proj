@@ -2,6 +2,8 @@
 require_once '../database/db_connect.php';
 session_start();
 
+include_once '../server/create_notif.php';
+
 $user_id = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -22,7 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         latitude = VALUES(latitude), longitude = VALUES(longitude), place_name = VALUES(place_name)";
     $inserted_loc = mysqli_query($conn, $sql);
     if ($inserted_loc === true) {
-        echo "Data inserted successfully";
+        $notif_title = "User Location changed";
+        $notif_details = "Location updated to: " . $placeName . "We use your location to provide weather data that can potentially affect electricity conosumption!";
+        $notif_type = "success";
+        create_notif($notif_title, $notif_details, $notif_type, $user_id);
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 06:51 PM
+-- Generation Time: Jan 25, 2024 at 08:18 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -53,6 +53,27 @@ CREATE TABLE `app_list_of_users` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `locations`
+--
+
+CREATE TABLE `locations` (
+  `location_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `latitude` decimal(11,8) NOT NULL,
+  `longitude` decimal(11,8) NOT NULL,
+  `place_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`location_id`, `user_id`, `latitude`, `longitude`, `place_name`) VALUES
+(4, 4, '14.59489140', '120.97826180', 'Manila, Philippines');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `notifications`
 --
 
@@ -61,6 +82,7 @@ CREATE TABLE `notifications` (
   `for` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `details` varchar(255) NOT NULL,
+  `notif_type` enum('success','warning','info') NOT NULL DEFAULT 'info',
   `notif_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -76,16 +98,16 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','regular') NOT NULL DEFAULT 'regular',
-  `user_location` varchar(255) DEFAULT NULL
+  `notif_settings` enum('on','off') NOT NULL DEFAULT 'on'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role`, `user_location`) VALUES
-(4, 'gab', 'gab@gmail.com', '$2y$10$cOuEOH1FLtf8SP6P3Wihleo4eT/R2YhBFImy/es4kTJWG6j8gFZim', 'regular', NULL),
-(6, 'admin', 'admin@heo.com', '$2y$10$xYaMenTxSlkjmF255hKwAu2WxGC3.HsJllcOOgaHpy79t7zjJnMbO', 'regular', NULL);
+INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `role`, `notif_settings`) VALUES
+(4, 'gab', 'gab@emaili.com', '$2y$10$cOuEOH1FLtf8SP6P3Wihleo4eT/R2YhBFImy/es4kTJWG6j8gFZim', 'regular', 'on'),
+(6, 'admin', 'admin@heo.com', '$2y$10$xYaMenTxSlkjmF255hKwAu2WxGC3.HsJllcOOgaHpy79t7zjJnMbO', 'regular', 'on');
 
 --
 -- Triggers `users`
@@ -116,6 +138,13 @@ ALTER TABLE `app_list_of_users`
   ADD KEY `fk_app_id` (`app_id`);
 
 --
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`location_id`),
+  ADD UNIQUE KEY `unique_user_id` (`user_id`);
+
+--
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
@@ -144,6 +173,12 @@ ALTER TABLE `app_list_of_users`
   MODIFY `list_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -159,6 +194,12 @@ ALTER TABLE `users`
 ALTER TABLE `app_list_of_users`
   ADD CONSTRAINT `fk_app_id` FOREIGN KEY (`app_id`) REFERENCES `appliances` (`app_id`) ON DELETE NO ACTION,
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION;
+
+--
+-- Constraints for table `locations`
+--
+ALTER TABLE `locations`
+  ADD CONSTRAINT `locations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `notifications`

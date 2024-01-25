@@ -22,12 +22,12 @@
                 </div>
 
                 <div class="text-container">
-                    <label>Track and Save <br> Electricity  <strong style="font-weight: bold;">Smartly</strong></label>
-                    <a href="../before_auth/reg_loginpage.php">
-                    <button >Let's get Started</button>
+                    <label>Track and Save <br> Electricity <strong style="font-weight: bold;">Smartly</strong></label>
+                    <a href="loginpage.php">
+                        <button>Let's get Started</button>
                     </a>
                 </div>
-                
+
                 <div class="social-container">
                     <img src="../assets/img/fb.png">
                     <img src="../assets/img/twiter.png">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="right">
-            
+
         </div>
     </div>
 

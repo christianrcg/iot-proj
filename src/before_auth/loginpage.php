@@ -81,9 +81,9 @@ session_start();
 
                                     setTimeout(function() {
                                         if (res.user_role == 'admin') {
-                                            window.location.href = '../components/admin_sidebar.php'
+                                            window.location.href = '../after_auth/admin/admin_homepage.php'
                                         } else {
-                                            window.location.href = '../components/reg_sidebar.php'
+                                            window.location.href = '../after_auth/regular/reg_homepage.php'
                                         }
                                     }, 1500);
                                 }

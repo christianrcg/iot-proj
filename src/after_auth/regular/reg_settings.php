@@ -15,7 +15,8 @@ if ($user_info->num_rows > 0) {
     $notif_settings = $row['notif_settings'];
 }
 
-$loc_sql = "SELECT COALESCE(l.place_name, 'Not Set') AS place_name
+$loc_sql = "SELECT COALESCE(l.place_name, ' ') AS place_name,  
+        COALESCE(l.place_local, 'Not Set') AS place_local
         FROM users u
         LEFT JOIN locations l ON u.user_id = l.user_id
         WHERE u.user_id = $user_id";
@@ -25,8 +26,10 @@ $loc_sql_res = $conn->query($loc_sql);
 if ($loc_sql_res->num_rows > 0) {
     $row = $loc_sql_res->fetch_assoc();
     $place_name = $row['place_name'];
+    $place_local = $row['place_local'];
 } else {
-    $place_name = 'Not Set';
+    $place_name = ' ';
+    $place_local = 'Not Set';
 }
 
 ?>
@@ -142,7 +145,7 @@ if ($loc_sql_res->num_rows > 0) {
                                 <label for=""> Location:</label>
                                 <div class="input-group">
                                     <i class="fa-solid fa-location-dot fa-sm" style="color: #A598F6;"></i>
-                                    <input type="text" id="selected-location" name="location" placeholder="<?php echo $place_name; ?>" readonly>
+                                    <input type="text" id="selected-location" name="location" placeholder="<?php echo $place_local . ", " . $place_name; ?>" readonly>
                                     <button class="edit-btn" id="popup-btn">
                                         <i class="fa-solid fa-pen-to-square fa-sm" style="color: #ffffff;"></i>
                                     </button>

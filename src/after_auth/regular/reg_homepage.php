@@ -64,7 +64,7 @@ include_once '../../components/reg_sidebar.php';
                     <div class="monthly-consumption-input">
                         <h3>Set monthly budget:</h3>
                         <div class="input-group">
-                            <input type="email" name="email" placeholder="username">
+                            <input type="number" name="budget" placeholder="&#8369;">
                             <button class="edit-btn" type="submit">
                                 <i class="fa-regular fa-pen-to-square fa-sm" style="color: #ffffff;"></i>
                             </button>
@@ -73,41 +73,51 @@ include_once '../../components/reg_sidebar.php';
                 </div>
 
                 <!-- ADDRESS TEMPERATURE -->
+                <?php
+                //get location and weather
+                include_once '../../functions/user/fetch_location.php';
+                include_once '../../functions/api/get_weather.php';
 
+                $location_data = getLocationData($_SESSION['user_id']);
+                $latitude = isset($location_data['latitude']) ? $location_data['latitude'] : 'Not Set';
+                $longitude = isset($location_data['longitude']) ? $location_data['longitude'] : 'Not Set';
+                $place_local = isset($location_data['place_local']) ? $location_data['place_local'] : 'Not Set';
+                $place_name = isset($location_data['place_name']) ? $location_data['place_name'] : 'Not Set';
+
+                $weather_data = null;
+                if ($latitude !== 'Not Set' && $longitude !== 'Not Set') {
+                    $weather_data = getWeatherLocation($latitude, $longitude);
+                }
+
+                ?>
                 <div class="address-temperature">
                     <div class="address-temperature-location">
                         <i class="fa-solid fa-location-dot fa-2xl" style="color: #c80404;"></i>
                         <div class="address-location-text">
-                            <h1>Bucana Malaki</h1>
-                            <p>Naic, Cavite, Philippines</p>
+                            <h1><?php echo $location_data['place_local'] ?? 'Not Set'; ?></h1>
+                            <p><?php echo $location_data['place_name'] ?? 'Not Set'; ?></p>
                         </div>
                     </div>
 
                     <div class="address-temperature-degree">
-                        <?php
-                        //get location and weather
-                        include_once '../../functions/user/fetch_location.php';
-                        include_once '../../functions/api/get_weather.php';
-
-                        $location_data = getLocationData($_SESSION['user_id']);
-                        $latitude = $location_data['latitude'];
-                        $longitude = $location_data['longitude'];
-
-                        $weather_data = getWeatherLocation($latitude, $longitude);
-                        ?>
                         <div class="icon-container">
-                            <img src="http://openweathermap.org/img/w/<?php echo $weather_data['weather_icon']; ?>.png" alt="weather_icon" style="height: 2em;">
-                            <h1><?php echo round($weather_data['temperature']); ?>°C</h1>
+                            <?php if ($weather_data !== null && isset($weather_data['weather_icon'])) : ?>
+                                <img src="http://openweathermap.org/img/w/<?php echo $weather_data['weather_icon']; ?>.png" alt="weather_icon" style="height: 2rem; width: 2rem;">
+                            <?php else : ?>
+                                <img src="../../assets/img/weatherlogo_32x32.png" alt="weather_icon" style="height: 2rem; width: 2rem;">
+                            <?php endif; ?>
+                            <h1><?php echo isset($weather_data['temperature']) ? round($weather_data['temperature']) . '°C' : 'Not Set'; ?></h1>
                         </div>
 
                         <div class="address-temperature-text">
-                            <h1><?php echo $weather_data['weather_main']; ?></h1>
+                            <h1><?php echo isset($weather_data['weather_main']) ? $weather_data['weather_main'] : 'Not Set'; ?></h1>
                             <div class="address-temp">
                                 <h1>feels like</h1>
-                                <p><?php echo round($weather_data['feels_like']); ?>°C</p>
+                                <p><?php echo isset($weather_data['feels_like']) ? round($weather_data['feels_like']) . '°C' : 'Not Set'; ?></p>
                             </div>
                         </div>
                     </div>
+
 
                 </div>
 

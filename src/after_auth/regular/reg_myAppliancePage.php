@@ -242,6 +242,11 @@ include_once '../../components/reg_sidebar.php';
             </div>
         </div>
 
+        <div class="not-available">
+            <h1>"This Breakpoint is Under Development"</h1>
+            <p>Please use the desktop mode for content availability!</p>
+        </div>
+
 
         <script>
             const toggleSwitch_0 = document.getElementById('0');

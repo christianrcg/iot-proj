@@ -1,0 +1,154 @@
+div.content {
+    margin-left: 300px;
+    padding: 1px 16px;
+    background-color: #c7defe;
+    overflow-x: hidden;
+}
+
+.feedback{
+    height: 110vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.feedback-text{
+    height: 15vh;
+    width: 70vw ;
+    background-color: #1c1f34;
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    margin-top: 60px;
+}
+
+.feedback-text h1{
+    color: aliceblue;
+    position: relative;
+    top: 5px;
+    left: 50px;
+}
+
+.not-available{
+    display: none;
+  }
+  
+  
+@media screen and (max-width: 1090px) {
+      
+      .not-available{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+      }
+      .not-available h1{
+          font-weight: bold;
+          color: rgb(8, 49, 78);
+          text-align: center;
+          font-family: "Poppins";
+          font-style: italic;
+          letter-spacing: 0.3rem;
+      }
+      .not-available p{
+          color: white;
+          text-align: center;
+          font-style: italic;
+      } 
+      
+      .feedback{
+        display: none;
+      }
+  
+  }
+
+@media screen and (max-width: 700px) {
+    .notification-text h1{
+        color: aliceblue;
+        text-align: center;
+        position: relative;
+        top: 5px;
+        left: 0;
+    }
+    div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+    .notification-text h1{
+        color: aliceblue;
+        text-align: center;
+        position: relative;
+        top: 5px;
+        left: 0;
+    }
+}
+
+/* FEEDBACKS TABLE */
+
+* {
+    box-sizing: border-box;
+  }
+
+  #myInput {
+    background-color: #040018;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 20vw;
+    height: 50px;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #1d1e42;
+    font-size: 18px;
+    color: white;
+  }
+
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 10px;
+  }
+
+  #myTable td {
+    font-weight: 200;
+  }
+
+  .search-box{
+    position: relative;
+  }
+
+  .search-box input{
+    color: white;
+    border-color: white;
+  }
+
+  .search-box i{
+    position: absolute;
+    color: rgb(253, 250, 250);
+    top: 18px;
+    left: 15px;
+  }
+
+  .table-header{
+    background-color: #1d1e42;
+    border-style: solid;
+    border-color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none ;
+  }
+  .table-header th{
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .users-feedback{
+    margin-top: 20px;
+  }

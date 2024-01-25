@@ -2,6 +2,8 @@
 require_once('../../functions/database/db_connect.php');
 session_start();
 include_once '../../components/reg_sidebar.php';
+
+$user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -29,22 +31,52 @@ include_once '../../components/reg_sidebar.php';
             </div>
             <div class="notifs-cont">
 
-                <div class="notif-card">
-                    <span class="notif-header">
-                        <p class="notif-title">An appliance is Successsfully added!</p>
-                        <button class="view_btn" id="toggleButton" style="height: 40px; width: 16vh;">
-                            View Details
-                        </button>
-                        <p>|</p>
-                        <button class="close-icon">
-                            <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff; cursor: pointer;"></i>
-                        </button>
-                    </span>
-                    <span class="notif-details" id="detailsContainer">
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus quae odit, repellendus at, obcaecati accusantium, suscipit tempore sunt non facilis eum distinctio? Numquam quisquam reprehenderit quam aliquam, libero debitis hic.</p>
-                    </span>
-                </div>
+                <?php
+                $sql = "SELECT notif_id, user_id, title, details, notif_type, DATE_FORMAT(notif_date, '%l:%i %p %M %e') AS formatted_notif_date FROM notifications WHERE user_id=$user_id ORDER BY notif_date DESC";
+                $notif_data = mysqli_query($conn, $sql) or die('error');
+                $bg_color = '';
+                $notif_id = '';
 
+                if (mysqli_num_rows($notif_data) > 0) {
+                    while ($row = mysqli_fetch_assoc($notif_data)) {
+                        $notif_id = $row['notif_id'];
+                        $title = $row['title'];
+                        $details = $row['details'];
+                        $notif_type = $row['notif_type'];
+                        $date = $row['formatted_notif_date'];
+
+                        if ($notif_type == 'success') {
+                            $bg_color = '#286e28';
+                        } else if ($notif_type == 'warning') {
+                            $bg_color = '#8B0021';
+                        } else {
+                            $bg_color = '#3D3D3D';
+                        }
+
+                ?>
+                        <div class="notif-card" style="background: <?php echo $bg_color; ?>;">
+                            <span class="notif-header">
+                                <p class="notif-title"><?php echo $title; ?></p>
+                                <button class="view_btn" id="toggleButton<?php echo $notif_id; ?>" style=" height: 40px; width: 16vh;">
+                                    View Details
+                                </button>
+                                <p>|</p>
+                                <form action="../../functions/server/remove_notifications.php" method="POST">
+                                    <input type="hidden" name="notif_id" value="<? echo $notif_id; ?>">
+                                    <button type="submit" name="submit" class="close-icon">
+                                        <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff; cursor: pointer;"></i>
+                                    </button>
+                                </form>
+                            </span>
+                            <span class="notif-details" id="detailsContainer<?php echo $notif_id; ?>">
+                                <p> <?php echo $details; ?></p>
+                                <p> <small style="color:darkgray"><?php echo $date; ?></small></p>
+                            </span>
+                        </div>
+                <?php
+                    }
+                }
+                ?>
             </div>
 
         </div>
@@ -52,26 +84,16 @@ include_once '../../components/reg_sidebar.php';
 
     <script>
         $(document).ready(function() {
-            // Hide details container on page load
-            var detailsVisible = false;
-            $("#detailsContainer").hide();
+            // Hide notif-details on page load
+            $(".notif-details").hide();
 
-            $("#toggleButton").click(function() {
-                // Toggle visibility of details container
-                $("#detailsContainer").slideToggle();
+            // Handle click event for each "View Details" button
+            $(".view_btn").click(function() {
+                // Get the ID of the clicked button
+                var notifId = $(this).attr('id').replace('toggleButton', '');
 
-                // Update button text based on the new visibility state
-                detailsVisible = !detailsVisible;
-                var buttonText = detailsVisible ? "Close Details" : "View Details";
-                $("#toggleButton").text(buttonText);
-
-                // Check if details are visible and load content using AJAX if necessary
-                if (detailsVisible) {
-                    // Use AJAX to load content if needed
-                    // Example: $.ajax({ url: 'your_details_endpoint', method: 'GET', success: function(data) { /* handle success */ } });
-                    // For simplicity, we'll just log a message here
-                    console.log("Details are visible");
-                }
+                // Toggle visibility of notif-details
+                $("#detailsContainer" + notifId).slideToggle();
             });
         });
     </script>

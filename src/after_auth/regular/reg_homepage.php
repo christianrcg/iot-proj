@@ -75,17 +75,27 @@ include_once '../../components/reg_sidebar.php';
                     </div>
 
                     <div class="address-temperature-degree">
+                        <?php
+                        //get location and weather
+                        include_once '../../functions/user/fetch_location.php';
+                        include_once '../../functions/api/get_weather.php';
 
+                        $location_data = getLocationData($_SESSION['user_id']);
+                        $latitude = $location_data['latitude'];
+                        $longitude = $location_data['longitude'];
+
+                        $weather_data = getWeatherLocation($latitude, $longitude);
+                        ?>
                         <div class="icon-container">
-                            <i class="fa-solid fa-sun fa-2xl" style="color: #FFD43B;"></i>
-                            <h1>31 °C</h1>
+                            <img src="http://openweathermap.org/img/w/<?php echo $weather_data['weather_icon']; ?>.png" alt="weather_icon" style="height: 2em;">
+                            <h1><?php echo round($weather_data['temperature']); ?>°C</h1>
                         </div>
 
                         <div class="address-temperature-text">
-                            <h1>Sunny</h1>
+                            <h1><?php echo $weather_data['weather_main']; ?></h1>
                             <div class="address-temp">
                                 <h1>feels like</h1>
-                                <p>33 °C</p>
+                                <p><?php echo round($weather_data['feels_like']); ?>°C</p>
                             </div>
                         </div>
                     </div>

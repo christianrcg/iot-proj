@@ -72,11 +72,11 @@ if ($loc_sql_res->num_rows > 0) {
                     <div class="section-header">
                         <p> Account Settings</p>
                         <span class="btn-cont">
-                            <button class="btn-header" id="">
-                                <a href="../../before_auth/landingpage.php"> Switch Account</a>
+                            <button class="btn-header" id="switchAcc">
+                                Switch Account
                                 <i class="fa-solid fa-circle-user fa-sm icons" style="color: #efc135;"></i>
                             </button>
-                            <button class="btn-header" id="">
+                            <button class="btn-header" id="logoutBtn">
                                 Logout
                                 <i class="fa-solid fa-right-from-bracket fa-sm icons" style="color: #8b0021;"></i>
                             </button>
@@ -111,23 +111,25 @@ if ($loc_sql_res->num_rows > 0) {
                             </div>
                         </span>
                         <div class="divider"></div>
-                        <span class="input-span-col">
-                            <div class="input-cont space-bw">
-                                <label for=""> Change Password:</label>
-                                <div class="input-group">
-                                    <input type="password" name="password" placeholder="">
+                        <form action="../../functions/user/update_pasword.php" method="POST">
+                            <span class="input-span-col">
+                                <div class="input-cont space-bw">
+                                    <label for=""> Change Password:</label>
+                                    <div class="input-group">
+                                        <input type="password" name="new_password" placeholder="" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-cont space-bw">
-                                <label for=""> Retype Password:</label>
-                                <div class="input-group">
-                                    <input type="password" name="password" placeholder="">
+                                <div class="input-cont space-bw">
+                                    <label for=""> Retype Password:</label>
+                                    <div class="input-group">
+                                        <input type="password" name="confirm_password" placeholder="" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="input-cont flex-end">
-                                <button input type="submit" id="save-pass-btn" class="b-sdw"> Save Changes</button>
-                            </div>
-                        </span>
+                                <div class="input-cont flex-end">
+                                    <button input type="submit" id="save-pass-btn" class="b-sdw"> Save Changes</button>
+                                </div>
+                            </span>
+                        </form>
                     </div>
                 </section>
                 <section class="section-cont mb-m">
@@ -264,6 +266,7 @@ if ($loc_sql_res->num_rows > 0) {
                 })
                 .catch(error => console.error('Error:', error));
         });
+
         document.getElementById('checkbox').addEventListener('change', function() {
             var newSetting = this.checked ? 'on' : 'off';
 
@@ -298,6 +301,16 @@ if ($loc_sql_res->num_rows > 0) {
                 modal.style.display = 'none';
             }
         };
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            alert("Confirm Logout?");
+            window.location.href = '../../functions/server/logout.php';
+        });
+
+        document.getElementById('switchAcc').addEventListener('click', function() {
+            alert("Switch Account?");
+            window.location.href = '../../functions/server/switch_account.php';
+        });
     </script>
 
 </body>

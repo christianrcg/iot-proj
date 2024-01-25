@@ -1,6 +1,4 @@
 <?php
-require_once '../database/db_connect.php';
-session_start();
 
 function getLocationData($user_id)
 {

@@ -14,7 +14,7 @@ div.content {
 }
 
 .notification-text{
-    height: 20vh;
+    height: 15vh;
     width: 70vw ;
     background-color: black;
     border-color: aliceblue;
@@ -28,6 +28,54 @@ div.content {
     top: 5px;
     left: 50px;
 }
+
+*{
+    color: aliceblue;
+}
+
+.notifs-cont{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    background: white;
+    align-items: center;
+}
+
+.notif-card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 80%;
+    padding: 0px 20px;
+    margin-top: 1rem;
+    background: green;
+    border-radius: 12px;
+    border: 2px solid blue;
+}
+
+.notif-header{
+    display: flex;
+    align-items: center;
+    min-width: 100%;
+    border: 1px solid red;
+}
+.notif-header p, button{
+    margin-left: 10px;
+    background: none;
+}
+
+.notif-details{
+    display: none;
+}
+
+.notif-title{
+    margin-right: auto;
+}
+
+.view-btn{
+
+}
+
 
 @media screen and (max-width: 700px) {
     .notification-text h1{
@@ -50,67 +98,3 @@ div.content {
     }
 }
 
-/* NOTIFICATION CARD */
-
-.card-container{
-    position: relative;
-    top: 30px;
-    width: 70vw;
-    height: 100vh;
-    margin-bottom: 20px;
-    
-}
-
-.notification-appliance-card{
-    border: solid 2px #035b36;
-    background-color: #035b36;
-    border-radius: 10px;
-    width: 60vw;
-    height: 70px;
-    margin: auto;
-    margin-bottom: 20px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
-.notification-message h3{
-    font-weight: lighter;
-    color: white;
-    margin-left: 30px;
-}
-
-.close-icon{
-    width: 40px;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between ;
-}
-
-.close-icon i{
-    cursor: pointer;
-}
-
-.close-icon h1{
-    color: white;
-    font-weight: 300;
-}
-
-
-
-.notification-exceed-card{
-    border: solid 2px #8b0021;
-    background-color: #8b0021;
-    border-radius: 10px;
-    width: 60vw;
-    height: 70px;
-    margin: auto;
-    margin-bottom: 20px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}

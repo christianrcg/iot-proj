@@ -37,8 +37,10 @@ div.content {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    background: white;
+    background: #09091c;
     align-items: center;
+    margin-top: 30px;
+    height: 100%;
 }
 
 .notif-card{
@@ -48,32 +50,48 @@ div.content {
     width: 80%;
     padding: 0px 20px;
     margin-top: 1rem;
-    background: green;
+    background: rgb(40, 110, 40);
     border-radius: 12px;
-    border: 2px solid blue;
 }
 
 .notif-header{
     display: flex;
     align-items: center;
     min-width: 100%;
-    border: 1px solid red;
+    height: 10vh;
 }
 .notif-header p, button{
     margin-left: 10px;
     background: none;
 }
 
+.notif-header p{
+    font-size: 20px;
+    font-weight: 500;
+}
+
 .notif-details{
-    display: none;
+    font-style: italic;
+
 }
 
 .notif-title{
     margin-right: auto;
 }
 
-.view-btn{
+.notif-header #toggleButton {
+    border-radius: 50px;
+    border: solid 1px white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.notif-header #toggleButton:hover {
+    background-color: aliceblue;
+    color: #09091c;
+}
 
+.close-icon{
+    border: none;
 }
 
 

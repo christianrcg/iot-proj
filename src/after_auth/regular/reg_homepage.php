@@ -26,14 +26,20 @@ include_once '../../components/reg_sidebar.php';
             </div>
 
             <div class="container">
+
+                <!-- HEADER -->
+
                 <div class="header">
                     <h1>Hello User!</h1>
                     <p>welcome to your home electricity saver app</p>
                 </div>
 
+                <!-- GRAPH -->
 
                 <div class="bar-graph"></div>
 
+
+                <!-- ELECTRICITY RATE -->
 
                 <div class="electricity-rate">
                     <div class="electricity-rate-content">
@@ -45,6 +51,8 @@ include_once '../../components/reg_sidebar.php';
                     </div>
                 </div>
 
+
+                <!-- MONTHLY CONSUMPTION -->
 
                 <div class="monthly-consumption">
 
@@ -64,6 +72,7 @@ include_once '../../components/reg_sidebar.php';
                     </div>
                 </div>
 
+                <!-- ADDRESS TEMPERATURE -->
 
                 <div class="address-temperature">
                     <div class="address-temperature-location">
@@ -102,6 +111,8 @@ include_once '../../components/reg_sidebar.php';
 
                 </div>
 
+
+                <!-- ELECTRICITY CONSUMPTION -->
 
                 <div class="electricity-consumption">
                     <div class="electricity-consumption-header">

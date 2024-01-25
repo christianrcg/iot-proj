@@ -480,11 +480,25 @@ div.content {
 }
 
 .input-group{
-    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px;
+    background-color: #161616;
+    border-radius: 8px;
+    border: 2px solid #646464;
+    height: 20px;
 }
 
 .input-group input{
     width: 120px;
     height: 20px;
     border: none;
+    background-color: #161616;
+    color: white;
+}
+
+.input-group .edit-btn{
+    background-color: #09091c;
 }

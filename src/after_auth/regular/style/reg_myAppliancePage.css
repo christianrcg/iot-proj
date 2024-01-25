@@ -20,6 +20,7 @@ div.content {
     border-color: aliceblue;
     border-style: solid;
     margin-top: 60px;
+    align-items: center;
 }
 
 .my-appliance-text h1{
@@ -36,6 +37,39 @@ div.content {
     color: white;
   }
 
+.not-available{
+  display: none;
+}
+
+
+@media screen and (max-width: 1090px) {
+    
+    .not-available{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .not-available h1{
+        font-weight: bold;
+        color: rgb(8, 49, 78);
+        text-align: center;
+        font-family: "Poppins";
+        font-style: italic;
+        letter-spacing: 0.3rem;
+    }
+    .not-available p{
+        color: white;
+        text-align: center;
+        font-style: italic;
+    } 
+    
+    .my-appliance{
+      display: none;
+    }
+
+}
 
 @media screen and (max-width: 700px) {
     .my-appliance-text h1{

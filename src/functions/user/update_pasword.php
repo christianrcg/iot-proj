@@ -10,7 +10,7 @@ $confirm_password = $_POST['confirm_password'];
 
 if ($new_password === $confirm_password) {
     $notif_title = "Password Updated";
-    $notif_details = "You have updated for password";
+    $notif_details = "You have updated your password";
     $notif_type = "success";
     create_notif($notif_title, $notif_details, $notif_type, $user_id);
     updatePassword($user_id, $new_password);

@@ -99,6 +99,9 @@ div.content {
   .header-utils{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
   #myInput {
@@ -110,8 +113,7 @@ div.content {
     font-size: 16px;
     padding: 12px 20px 12px 40px;
     border: 1px solid #ffffff;
-    border-radius: 20px;
-    margin-bottom: 12px;
+    border-radius: 8px;
   }
 
   #myTable {
@@ -146,16 +148,18 @@ div.content {
     left: 15px;
   }
 
-  .header-utils button{
+  .header-utils .main-btn{
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 20px;
     height: 50px;
     width: 200px;
     background-color: #4f407a;
     border-style: none;
+    font-weight: 800;
+    color: rgb(204, 204, 204);
 
   }
-  .header-utils button:hover{
+  .header-utils .main-btn:hover{
     background-color: #3a2f56;
   }
 
@@ -176,7 +180,7 @@ div.content {
 
   /* SWITCH STYLING */
 
-  .switch-container {
+  /* .switch-container {
     display: flex;
     align-items: center;
   }
@@ -228,8 +232,59 @@ div.content {
 
   input:checked + .slider:before {
     transform: translateX(26px);
-  }
+  } */
  
+  .switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.switch input {
+    display:none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #A598F6;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color:#4F407A;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+  
   .action-container{
     display: flex;
   }
@@ -238,4 +293,44 @@ div.content {
     margin-right: 20px;
     cursor: pointer;
   }
- 
+  
+  .form-container{
+    display: flex;
+    width: 50%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  select{
+    height: 50px;
+    background-color: #040018;
+    color: rgb(161, 166, 171);
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .b-sdw{
+    box-shadow: 2px 2px 4px rgba(204,204,204, 0.5);
+}
+
+.action-container button{
+  background: #1d1e42;
+}
+
+.filter-btn{
+  cursor: pointer;
+  border-radius: 8px;
+  height: 40px;
+  padding-inline: 2rem; 
+  background-color: #31507F ;
+  border-style: none;
+  font-weight: 800;
+  color: rgb(204, 204, 204);
+}
+.filter-btn:hover{
+  background-color: #1d304c;
+}
+

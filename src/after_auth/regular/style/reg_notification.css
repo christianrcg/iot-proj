@@ -71,21 +71,21 @@ div.content {
 }
 
 .notif-details{
+    display: none;
     font-style: italic;
-
 }
 
 .notif-title{
     margin-right: auto;
 }
 
-.notif-header #toggleButton {
+.notif-header .view_btn {
     border-radius: 50px;
     border: solid 1px white;
     cursor: pointer;
     margin-right: 10px;
 }
-.notif-header #toggleButton:hover {
+.notif-header .view_btn:hover{
     background-color: aliceblue;
     color: #09091c;
 }
@@ -93,7 +93,6 @@ div.content {
 .close-icon{
     border: none;
 }
-
 
 @media screen and (max-width: 700px) {
     .notification-text h1{

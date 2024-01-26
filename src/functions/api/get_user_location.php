@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $inserted_loc = mysqli_query($conn, $sql);
     if ($inserted_loc === true) {
         $notif_title = "User Location changed";
-        $notif_details = "Location updated to: " . $place_local . ", " . $place_name . ". We use your location to provide weather data that can potentially affect electricity conosumption!";
+        $notif_details = 'Location updated to: <b> ' . $place_local . ', ' . $place_name . '</b>. We use your location to provide weather data that can potentially affect electricity conosumption! See your updated <a href="reg_homepage.php"><b> Dashboard. </b></a>';
         $notif_type = "info";
         create_notif($notif_title, $notif_details, $notif_type, $user_id);
     } else {

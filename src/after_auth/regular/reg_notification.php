@@ -34,8 +34,6 @@ $user_id = $_SESSION['user_id'];
                 <?php
                 $sql = "SELECT notif_id, user_id, title, details, notif_type, DATE_FORMAT(notif_date, '%l:%i %p %M %e') AS formatted_notif_date FROM notifications WHERE user_id=$user_id ORDER BY notif_date DESC";
                 $notif_data = mysqli_query($conn, $sql) or die('error');
-                $bg_color = '';
-                $notif_id = '';
 
                 if (mysqli_num_rows($notif_data) > 0) {
                     while ($row = mysqli_fetch_assoc($notif_data)) {
@@ -56,14 +54,14 @@ $user_id = $_SESSION['user_id'];
                 ?>
                         <div class="notif-card" style="background: <?php echo $bg_color; ?>;">
                             <span class="notif-header">
-                                <p class="notif-title"><?php echo $title; ?></p>
-                                <button class="view_btn" id="toggleButton<?php echo $notif_id; ?>" style=" height: 40px; width: 16vh;">
+                                <p class="notif-title"><?php echo $title; ?> </p>
+                                <button class="view_btn" data-id="<?php echo $notif_id; ?>" style=" height: 40px; width: 16vh;">
                                     View Details
                                 </button>
                                 <p>|</p>
-                                <form action="../../functions/server/remove_notifications.php" method="POST">
-                                    <input type="hidden" name="notif_id" value="<? echo $notif_id; ?>">
-                                    <button type="submit" name="submit" class="close-icon">
+                                <form action="../../functions/server/remove_notifications.php" method="GET" class="rm_form">
+                                    <input type="hidden" name="remove_notif" value="<?php echo $notif_id; ?>">
+                                    <button type="submit" name="remove_notif" class="close-icon">
                                         <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff; cursor: pointer;"></i>
                                     </button>
                                 </form>
@@ -78,7 +76,6 @@ $user_id = $_SESSION['user_id'];
                 }
                 ?>
             </div>
-
         </div>
     </div>
 
@@ -89,16 +86,21 @@ $user_id = $_SESSION['user_id'];
 
             // Handle click event for each "View Details" button
             $(".view_btn").click(function() {
-                // Get the ID of the clicked button
-                var notifId = $(this).attr('id').replace('toggleButton', '');
-
                 // Toggle visibility of notif-details
+                var notifId = $(this).data('id');
                 $("#detailsContainer" + notifId).slideToggle();
+            });
+
+            // Prevent duplicate form submissions
+            $(".rm_form").submit(function(e) {
+                e.preventDefault(); // Prevent the default form submission
+                var confirmed = confirm("Are you sure you want to remove this notification?");
+                if (confirmed) {
+                    $(this).unbind('submit').submit(); // Submit the form if confirmed
+                }
             });
         });
     </script>
-
-
 </body>
 
 </html>

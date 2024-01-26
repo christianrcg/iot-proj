@@ -17,3 +17,5 @@ violet
 '#8B0021', //red dark
 '#FCF8F8', //for white text
 '#31507F', //dark blue text
+
+#4f407a

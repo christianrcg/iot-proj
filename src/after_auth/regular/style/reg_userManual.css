@@ -125,18 +125,15 @@ div.content {
 .docs-vid-container{
     width: 70vw;
     height: 25vw;
-    text-align: center;
     border: solid 3px rgb(78, 78, 78);
     border-radius: 20px;
     background-color: #141432;
-
 }
 
 .ajax-container-content{
     height: 21vw;
     border-radius: 20px;
     margin: 30px 60px 20px 60px;
-    
 }
 
 .feedback-container{

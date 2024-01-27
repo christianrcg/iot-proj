@@ -29,7 +29,20 @@
         <span class="separator">/</span>
         <p></p>
 
-        <a href="../admin/admin_feedbackspage.php">Feedbacks</a>
+        <a href="../admin/admin_feedbackspage.php">
+          Feedbacks
+          <?php
+            // Query to get feedback count
+          $countQuery = "SELECT COUNT(*) AS feedback_count FROM user_feedback";
+          $countResult = mysqli_query($conn, $countQuery);
+
+          // Fetch the count
+          $feedbackCount = mysqli_fetch_assoc($countResult)['feedback_count'];
+          ?>
+
+          <!-- Display the feedback count badge -->
+          <?php echo ($feedbackCount > 0) ? "<span class='badge' style='border: solid 1px red; border-radius: 10px; margin-left: 20px; padding: 10px; color: white; background-color: red;'>$feedbackCount</span>" : ""; ?>
+        </a>
 
         <span class="separator">/</span>
         <p></p>

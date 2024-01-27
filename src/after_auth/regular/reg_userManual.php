@@ -16,6 +16,11 @@ include_once '../../components/reg_sidebar.php';
     <!-- FONT AWESOME ICONS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- ALERTIFY -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+
     <!-- AJAX -->
     <script src="../../assets/jquery/jquery.js"></script>
 
@@ -50,7 +55,7 @@ include_once '../../components/reg_sidebar.php';
                 </div>
 
                 <div class="docs-vid-container">
-                    <div class="ajax-container-content" id="ajax-container">
+                    <div class="ajax-container-content" id="ajax-container" style="overflow:auto;">
                         <?php
                         include_once '../../after_auth/regular/reg_userManualVid.php';
                         ?>
@@ -63,15 +68,16 @@ include_once '../../components/reg_sidebar.php';
                         <h1>Your Feedback matters to us!</h1>
                     </div>
 
-                    <form>
+                    <form action="../../functions/user/submit_feedback.php" method="POST">
                         <div class="message-box">
-                             <i class="fa-solid fa-message" style="color: #ffffff; margin: 0px 5px 0px 10px"></i> 
-                            <input type="text" placeholder="Send us your message...">
+                            <i class="fa-solid fa-message" style="color: #ffffff; margin: 0px 5px 0px 10px"></i>
+                            <input type="text" name="feedback_message" placeholder="Send us your message...">
                         </div>
                         <div class="submit-btn">
                             <input type="submit" value="Submit">
                         </div>
                     </form>
+
 
                 </div>
 
@@ -120,6 +126,8 @@ include_once '../../components/reg_sidebar.php';
         });
     </script>
 
+    <!-- ALERTIFY -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 </body>
 

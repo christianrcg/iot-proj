@@ -31,6 +31,7 @@ include_once("../../components/admin_sidebar.php");
 
                 <div class="Meralco-rate">
                     <div class="meralco-rate-content">
+
                         <div class="meralco-rate-text">
                             <h2>Change Rate for kWh</h2>
                         </div>
@@ -52,9 +53,11 @@ include_once("../../components/admin_sidebar.php");
 
                 <div class="Users-number">
                     <div class="user-number-content">
-                        <i class="fa-solid fa-user fa-2xl" style="color: yellow;"></i>
+                        <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #FFD43B;"></i>
                         <span>|</span>
-                        <h1>23 Users</h1>
+                        <a href="../regular/reg_homepage.php" style="text-decoration: none; color: white;">
+                            <h1>View Site</h1>
+                        </a>
                     </div>
                 </div>
 

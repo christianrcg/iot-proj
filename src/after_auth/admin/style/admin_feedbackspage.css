@@ -1,7 +1,7 @@
 div.content {
     margin-left: 300px;
     padding: 1px 16px;
-    background-color: #c7defe;
+    background-color: #09091c;
     overflow-x: hidden;
 }
 
@@ -64,7 +64,7 @@ div.content {
   }
 
 @media screen and (max-width: 700px) {
-    .notification-text h1{
+    .feedback-text h1{
         color: aliceblue;
         text-align: center;
         position: relative;
@@ -75,7 +75,7 @@ div.content {
 }
 
 @media screen and (max-width: 400px) {
-    .notification-text h1{
+    .feedback-text h1{
         color: aliceblue;
         text-align: center;
         position: relative;
@@ -86,69 +86,72 @@ div.content {
 
 /* FEEDBACKS TABLE */
 
-* {
-    box-sizing: border-box;
-  }
+.users-feedback{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background-color: #09091c;
+  align-items: center;
+  margin-top: 30px;
+  height: 100%;
+}
 
-  #myInput {
-    background-color: #040018;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    width: 20vw;
-    height: 50px;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ffffff;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
+.feedback-card{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 80%;
+  padding: 0px 20px;
+  margin-top: 1rem;
+  background: rgb(25, 118, 142);
+  border-radius: 12px;
+}
 
-  #myTable {
-    border-collapse: collapse;
-    width: 100%;
-    background-color: #1d1e42;
-    font-size: 18px;
-    color: white;
-  }
+.feedback-header{
+  display: flex;
+  align-items: center;
+  min-width: 100%;
+  height: 10vh;
+  color: white;
+}
 
-  #myTable th, #myTable td {
-    text-align: left;
-    padding: 10px;
-  }
+.feedback-header p,button{
+  margin-left: 10px;
+  background: none;
+}
 
-  #myTable td {
-    font-weight: 200;
-  }
+.feedback-header p{
+  font-size: 20px;
+  font-weight: 500;
+}
 
-  .search-box{
-    position: relative;
-  }
+.feed-message{
+  display: none;
+  color: white;
+  font-style: italic;
 
-  .search-box input{
-    color: white;
-    border-color: white;
-  }
+  max-width: 100%; /* Adjust the maximum width as needed */
+  word-wrap: break-word; /* or word-wrap: break-all; depending on your preference */
+}
 
-  .search-box i{
-    position: absolute;
-    color: rgb(253, 250, 250);
-    top: 18px;
-    left: 15px;
-  }
+.feedback-title{
+  margin-right: auto;
+  font-style: italic;
+}
 
-  .table-header{
-    background-color: #1d1e42;
-    border-style: solid;
-    border-color: white;
-    border-top: none;
-    border-left: none;
-    border-right: none ;
-  }
-  .table-header th{
-    font-size: 15px;
-    text-align: center;
-  }
+.feedback-header .view_btn {
+  border-radius: 50px;
+  border: solid 1px white;
+  cursor: pointer;
+  margin-right: 10px;
+  color: white;
+}
 
-  .users-feedback{
-    margin-top: 20px;
-  }
+.feedback-header .view_btn:hover{
+  background-color: aliceblue;
+  color: #09091c;
+}
+
+.close-icon{
+  border: none;
+}

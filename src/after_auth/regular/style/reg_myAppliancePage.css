@@ -1,4 +1,4 @@
-div.content {
+div.cont {
   margin-left: 300px;
   padding: 1px 16px;
   background-color: #09091c;
@@ -79,7 +79,7 @@ div.content {
         top: 5px;
         left: 0;
     }
-    div.content {margin-left: 0;}
+    div.cont {margin-left: 0;}
 }
 
 @media screen and (max-width: 400px) {
@@ -180,61 +180,7 @@ div.content {
 
   /* SWITCH STYLING */
 
-  /* .switch-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .switch-label {
-    margin-right: 10px;
-  }
-
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-
-  .switch input {
-    display: none;
-  }
-
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-  }
-
-  input:checked + .slider {
-    background-color: #2196F3;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  } */
- 
-  .switch {
+.switch {
     display: inline-block;
     height: 34px;
     position: relative;
@@ -294,7 +240,7 @@ input:checked + .slider:before {
     cursor: pointer;
   }
   
-  .form-container{
+  .form-cont{
     display: flex;
     width: 50%;
     flex-direction: row;
@@ -303,7 +249,7 @@ input:checked + .slider:before {
     gap: 10px;
   }
 
-  select{
+  #type_filter{
     height: 50px;
     background-color: #040018;
     color: rgb(161, 166, 171);
@@ -313,7 +259,7 @@ input:checked + .slider:before {
   }
 
   .b-sdw{
-    box-shadow: 2px 2px 4px rgba(204,204,204, 0.5);
+    box-shadow: 2px 2px 4px rgba(0,0, 0, 0.5);
 }
 
 .action-container button{

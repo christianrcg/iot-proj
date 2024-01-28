@@ -128,7 +128,44 @@ include_once '../../components/reg_sidebar.php';
 
 
                 <!-- ELECTRICITY CONSUMPTION -->
+                <?php
+                include '../../functions/list-consumption/checkuser_in_list.php';
+                $user_id = $_SESSION['user_id'];
+                $check_user_list = check_user_in_list($user_id);
+                $check_user_list = 1;
 
+                print_r($check_user_list);
+                //varaibles to be displayed
+                $minutely = 0;
+                $hourly = 0;
+                $costPerMinute = 0;
+                $costPerHour = 0;
+                $costPerDay = 0;
+                $costPerMonth = 0;
+
+                if ($check_user_list == 0) {
+                    // use the variables to 0 as stated above
+                } else if ($check_user_list == 1) {
+                    include_once '../../functions/list-consumption/consumptionPipeline.php';
+                    include_once '../../functions/cost/computeCost.php';
+
+                    $allConsumptionDetails = getAllConsumptionDetails($user_id); //fetch in watts
+                    $convertedConsumptionDetails = convertDetailsToKWH($allConsumptionDetails); //fetch in kilowatts
+
+                    foreach ($convertedConsumptionDetails as $detail) {
+                        $minutely = $detail['minutely_consumption'];
+                        $hourly = $detail['hourly_consumption'];
+                        $daily = $detail['daily_consumption'];
+                        $monthly = $detail['monthly_consumption'];
+
+                        $costPerMinute = round(computeCost($minutely), 2);
+                        $costPerHour = round(computeCost($hourly), 2);
+                        $costPerDay = round(computeCost($daily), 2);
+                    }
+                    $costPerMonth = round(computeCost($monthly), 2);
+                    setMonthlyCost($user_id, $costPerMonth);
+                }
+                ?>
                 <div class="electricity-consumption">
                     <div class="electricity-consumption-header">
 
@@ -148,11 +185,11 @@ include_once '../../components/reg_sidebar.php';
                             </div>
                             <div class="per-minute-content">
                                 <div class="watts">
-                                    <h2>51 W</h2>
+                                    <h2><?php echo $minutely; ?> KW</h2>
                                 </div>
                                 <div class="cost">
                                     <h2>Cost: </h2>
-                                    <h2>0.612 PHP</h2>
+                                    <h2>&#8369; <?php echo $costPerMinute; ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -163,11 +200,11 @@ include_once '../../components/reg_sidebar.php';
                             </div>
                             <div class="per-hour-content">
                                 <div class="watts">
-                                    <h2>51 W</h2>
+                                    <h2><?php echo $hourly; ?> KW</h2>
                                 </div>
                                 <div class="cost">
                                     <h2>Cost: </h2>
-                                    <h2>0.612 PHP</h2>
+                                    <h2>&#8369; <?php echo $costPerHour; ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +215,7 @@ include_once '../../components/reg_sidebar.php';
                         <p>if continue in the following 24 hours</p>
                         <div class="cost-computed">
                             <h2>Cost: </h2>
-                            <h2 style="margin-left: 5px; font-style:italic;">881 PHP</h2>
+                            <h2 style="margin-left: 5px; font-style:italic;">&#8369; <?php echo $costPerDay; ?></h2>
                         </div>
                     </div>
 

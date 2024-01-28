@@ -89,10 +89,11 @@ include_once '../../components/reg_sidebar.php';
                 $weather_data = null;
                 if ($latitude !== 'Not Set' && $longitude !== 'Not Set') {
                     $weather_data = getWeatherLocation($latitude, $longitude);
+
+                    //will run if its hot weather and will create a warning notification that will displayed at notifications page.
+                    checkForHotWeather($weather_data['temperature'], $_SESSION['user_id']);
                 }
 
-                //will run if its hot weather and will create a warning notification that will displayed at notifications page.
-                checkForHotWeather($weather_data['temperature'], $_SESSION['user_id']);
                 ?>
                 <div class="address-temperature">
                     <div class="address-temperature-location">

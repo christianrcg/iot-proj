@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $delete_sql)) {
         $notif_title = "Appliance removed from the list";
-        $notif_details = 'The appliance <b>removed</b> in your appliances list is: <b> ' . $app_brand . ', ' . $app_model . '</b>. See your list in the <a href="reg_myAppliancePage.php"><b> My Appliance Page. </b></a>';
+        $notif_details = 'The appliance <b>removed</b> in your appliances list. See your list in the <a href="reg_myAppliancePage.php"><b> My Appliance Page. </b></a>';
         $notif_type = "info";
         create_notif($notif_title, $notif_details, $notif_type, $user_id);
     } else {

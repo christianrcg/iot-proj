@@ -40,7 +40,7 @@ div.content {
     position: relative;
     top: 40px;
     width: 70vw;
-    height: 65vh;
+    height: 100%;
     display: grid;
     grid-template-columns: 1.1fr 0.9fr 1fr;
     grid-template-rows: 0.4fr 1.6fr 0.8fr 0.8 0.8fr 0.8fr;
@@ -53,35 +53,19 @@ div.content {
       "electricity-consumption bar-graph bar-graph"
       "address-temperature bar-graph bar-graph"
       "address-temperature electricity-rate monthly-consumption";
+      
   }
   
   .header { 
     grid-area: header; 
     border: solid 1px #424242;
     border-radius: 10px;
-    background-image: url(../../../assets/img/banner.png);
+    background-image: url(../../../assets/img/banner2.png);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    /* width: 100%;
-    height: 100%; */
-    overflow: hidden;
-}
-
-.header::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: inherit;
-    top: 0;
-    left: 0px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: blur(10px); /* Adjust the blur value as per your preference */
 }
 
 .header>*{
@@ -89,19 +73,12 @@ div.content {
     margin-right: 10px;
 }
 
-.header h1, .header p {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
   .bar-graph { 
     grid-area: bar-graph;
     border: solid 1px #424242;
     border-radius: 10px;
     background-color: #141432;
+    padding: 10px;
 }
   
   .electricity-rate { 
@@ -123,6 +100,12 @@ div.content {
     border: solid 1px #424242;
     border-radius: 10px;
     background-color: #141432;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
   
   .electricity-consumption {
@@ -134,8 +117,7 @@ div.content {
   
 
 
-@media screen and (max-width: 1280px) {
-
+@media screen and (max-width: 1090px) {
     .not-available{
         display: flex;
         flex-direction: column;
@@ -225,6 +207,8 @@ div.content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 16px;
 }
 
 .electricity-consumption-header{
@@ -233,7 +217,6 @@ div.content {
     width: 347.138px;
     height: 100px;
     justify-content: space-between;
-
 }
 
 
@@ -374,9 +357,9 @@ div.content {
 
 .address-temperature-location{
     display: flex;
-    width: 300px;
+    width: 60%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 3px;
 }
 
@@ -390,7 +373,7 @@ div.content {
     text-align: center;
 }
 .address-location-text h1{
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 0px;
 }
 .address-location-text p{
@@ -400,46 +383,51 @@ div.content {
 
 .address-temperature-degree{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: row;
-    width: 300px;
+    width: 60%;
     color: white;
+    /* border: 2px solid red; */
 }
 .address-temperature-text{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0;
 }
 .address-temperature-text h1{
-    font-size: 10px;
+    font-size: 14px;
     font-style: italic;
 }
 
 .address-temp{
     display: flex;
-    width: 100px;
+   gap: 4px;
     align-items: center;
     justify-content: space-evenly;
+   
 }
 .address-temp h1{
-    font-size: 10px;
+    font-size: 14px;
 }
 .address-temp p{
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .icon-container{
-    margin-left: 55px;
+    /* margin-left: 55px; */
     display: flex;
+    flex-direction: column;
     width: 80px;
     align-items: center;
     justify-content: space-between;
+    /* border: 2px solid blue;" */
 }
 
 .icon-container h1{
     text-align: center;
     font-size: 15px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 /* ELECTRICITY RATE */
@@ -525,4 +513,23 @@ div.content {
 
 .input-group .edit-btn{
     background-color: #09091c;
+}
+
+#myChart{
+background-color: #09091c;
+color: aliceblue;
+width: 80%;
+}
+
+.mb-two{
+    margin-bottom: 2rem;
+}
+
+.analytics{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 12   px;
+    font-weight: 600;
+    color: aliceblue;
 }

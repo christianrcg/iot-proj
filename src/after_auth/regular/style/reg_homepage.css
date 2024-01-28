@@ -65,14 +65,38 @@ div.content {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    /* width: 100%;
+    height: 100%; */
+    overflow: hidden;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    top: 0;
+    left: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px); /* Adjust the blur value as per your preference */
 }
 
 .header>*{
     color: white;
     margin-right: 10px;
-
 }
-  
+
+.header h1, .header p {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
   .bar-graph { 
     grid-area: bar-graph;
     border: solid 1px #424242;
@@ -110,7 +134,7 @@ div.content {
   
 
 
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1280px) {
 
     .not-available{
         display: flex;
@@ -235,7 +259,7 @@ div.content {
 /* PER MINUTE */
 
 .per-minute-content{
-    width: 150px;
+    width: 170px;
     display: flex;
     align-items: center;
     background-color: #2d313b;
@@ -255,14 +279,14 @@ div.content {
 .watts{
     color: white;
     font-size: 7px;
-    width: 40px;
+    width: 65px;
     margin-left: 10px;
 }
 
 .cost{
     display: flex;
     justify-content: space-between;
-    width: 85px;
+    width: 80px;
     color: white;
     font-size: 7px;
 }
@@ -273,7 +297,7 @@ div.content {
 
 .minute-label{
     display: flex;
-    width: 100px;
+    width: 80px;
     border-style:ridge;
     border-color: #141432;
     border-top-left-radius: 5px;
@@ -291,7 +315,7 @@ div.content {
 /* PER HOUR */
 
 .per-hour-content{
-    width: 150px;
+    width: 170px;
     display: flex;
     align-items: center;
     background-color: #2d313b;
@@ -310,7 +334,7 @@ div.content {
 
 .hour-label{
     display: flex;
-    width: 100px;
+    width: 80px;
     border-style:ridge;
     border-color: #141432;
     border-top-left-radius: 5px;

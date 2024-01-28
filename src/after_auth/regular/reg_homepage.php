@@ -2,6 +2,10 @@
 require_once('../../functions/database/db_connect.php');
 session_start();
 include_once '../../components/reg_sidebar.php';
+
+include_once '../../functions/server/getElectricityRate.php';
+$user_id = $_SESSION['user_id'];
+$electricityRate = getElectrictyRate();
 ?>
 
 <!DOCTYPE html>
@@ -40,20 +44,32 @@ include_once '../../components/reg_sidebar.php';
 
 
                 <!-- ELECTRICITY RATE -->
+                <?php
+                $test = date('F');
+                $curMon = $test;
 
+                ?>
                 <div class="electricity-rate">
                     <div class="electricity-rate-content">
                         <i class="fa-solid fa-bolt-lightning fa-2xl" style="color: white;"></i>
                         <div class="electricity-rate-text">
-                            <p>Meralco electricity Rate as of November</p>
-                            <h1>₱12 kWh</h1>
+                            <p>Meralco electricity Rate as of <?php echo $curMon; ?></p>
+                            <h1>₱ <?php echo $electricityRate; ?> per kWh</h1>
                         </div>
                     </div>
                 </div>
 
 
                 <!-- MONTHLY CONSUMPTION -->
+                <?php
+                include_once '../../functions/cost/checkUserBudget.php';
 
+                $budget = checkUserBudget($user_id);
+                if ($budget > 0) {
+                    include_once '../../functions/server/exceededBudgetWarning.php';
+                    checkExceededBudget($user_id);
+                }
+                ?>
                 <div class="monthly-consumption">
 
                     <div class="monthly-consumption-text">
@@ -64,10 +80,13 @@ include_once '../../components/reg_sidebar.php';
                     <div class="monthly-consumption-input">
                         <h3>Set monthly budget:</h3>
                         <div class="input-group">
-                            <input type="number" name="budget" placeholder="&#8369;">
-                            <button class="edit-btn" type="submit">
-                                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #ffffff;"></i>
-                            </button>
+                            <form action="../../functions/cost/setBudget.php" method="POST" id="set-budget">
+                                <input type="number" name="budget" placeholder="&#8369;<?php echo $budget; ?>" min="0" step="100">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                <button class="edit-btn" type="submit" form="set-budget">
+                                    <i class="fa-regular fa-pen-to-square fa-sm" style="color: #ffffff;"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -132,9 +151,7 @@ include_once '../../components/reg_sidebar.php';
                 include '../../functions/list-consumption/checkuser_in_list.php';
                 $user_id = $_SESSION['user_id'];
                 $check_user_list = check_user_in_list($user_id);
-                $check_user_list = 1;
 
-                print_r($check_user_list);
                 //varaibles to be displayed
                 $minutely = 0;
                 $hourly = 0;

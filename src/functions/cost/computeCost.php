@@ -1,8 +1,4 @@
 <?php
-include_once '../../functions/server/getElectricityRate.php';
-
-$electricityRate = getElectrictyRate();
-
 
 function computeCost($kilowatts)
 {

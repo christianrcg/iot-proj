@@ -22,12 +22,14 @@ if (isset($_POST['login_user'])) {
             if (password_verify($loginPassword, $storedPassword)) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
 
                 $res = [
                     'status' => 200,
                     'message' => 'Authenticated',
-                    'user_role' => $_SESSION['role']
+                    'user_role' => $_SESSION['role'],
+                    'user_email' => $_SESSION['email']
                 ];
                 echo json_encode($res);
                 return;

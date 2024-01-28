@@ -113,10 +113,8 @@ if ($notif_status) {
             // Prevent duplicate form submissions
             $(".rm_form").submit(function(e) {
                 e.preventDefault(); // Prevent the default form submission
-                var confirmed = confirm("Are you sure you want to remove this notification?");
-                if (confirmed) {
-                    $(this).unbind('submit').submit(); // Submit the form if confirmed
-                }
+                $(this).unbind('submit').submit();
+
             });
         });
     </script>

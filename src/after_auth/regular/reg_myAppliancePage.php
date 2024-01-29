@@ -263,15 +263,15 @@ if (!$sql_result) {
                 </span>
                 <span class="input-group">
                     <label for="edit_app_type">App Type:</label>
-                    <input id="edit_app_type" name="app_type" readonly>
+                    <input id="edit_app_type" name="app_type" class="ig-inp-2" readonly>
                 </span>
                 <span class="input-group">
                     <label for="edit_app_brand">App Brand:</label>
-                    <input id="edit_app_brand" name="app_brand" readonly>
+                    <input id="edit_app_brand" name="app_brand" class="ig-inp-2" readonly>
                 </span>
                 <span class="input-group">
                     <label for="edit_app_model">App Model:</label>
-                    <input id="edit_app_model" name="app_model" readonly>
+                    <input id="edit_app_model" name="app_model" class="ig-inp-2" readonly>
                 </span>
                 <span class="input-group">
 
@@ -357,6 +357,13 @@ if (!$sql_result) {
             border: 1px solid #31507F;
         }
 
+        .ig-inp-2 {
+            width: 15rem;
+            padding: 8px 1rem;
+            border-radius: 8px;
+            border: 1px solid #31507F;
+        }
+
         .fl-col {
             flex-direction: column;
         }
@@ -409,6 +416,11 @@ if (!$sql_result) {
             justify-content: center;
             align-items: center;
             gap: 10px;
+        }
+
+        .img-round {
+            border-radius: 20%;
+            box-shadow: 0 2px 4px;
         }
     </style>
 
@@ -508,6 +520,8 @@ if (!$sql_result) {
             $('#app_brand').val('');
             $('#app_model').val('');
             $('#del-input').val('');
+            $('#updateForm')[0].reset();
+            $('#edit_image').attr('src', '/src/assets/img/logo-icon-only-1x1.png');
         }
 
         //add modal form handler:
@@ -700,7 +714,7 @@ if (!$sql_result) {
                         $('#app_id_edit').val(res.data.app_id);
                         $('#edit_app_type').val(res.data.app_type);
                         $('#edit_app_brand').val(res.data.app_brand);
-                        $('#edit_app_model').val(res.data._app_model);
+                        $('#edit_app_model').val(res.data.app_model);
 
                         $('#edit_consumption').val(res.data.consumption);
                         $('#edit_orig-consumption').val(res.data.consumption);
@@ -712,17 +726,52 @@ if (!$sql_result) {
                             $('#edit_image').attr('src', '/src/assets/img/logo-icon-only-1x1.png'); // Set a placeholder image source
                         }
                         console.log('List:', res.data.list_id);
-                        console.log('id:', res.data.app_id);
-                        console.log('type:', res.data.app_type);
-                        console.log('brand:', res.data.app_brand);
+                        // console.log('id:', res.data.app_id);
+                        // console.log('type:', res.data.app_type);
+                        // console.log('brand:', res.data.app_brand);
                         console.log('model:', res.data.app_model);
-                        console.log('consumption:', res.data.consumption);
-                        console.log('quantity:', res.data.quantity);
+                        // console.log('consumption:', res.data.consumption);
+                        // console.log('quantity:', res.data.quantity);
 
                         openEditModal();
-
-
                     } else if (res.status == 404) {
+                        let notif = alertify.error(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).on('submit', '#updateForm', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            formData.append("update_app", true);
+
+            $.ajax({
+                type: 'POST',
+                url: '../../functions/appliance/update_add.php',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    let res = jQuery.parseJSON(response);
+                    alertify.set('notifier', 'position', 'top-center');
+
+                    if (res.status == 200) {
+                        let notif = alertify.success(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                        closeModal();
+                        resetFormInputs();
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1500);
+                    } else if (res.status == 500) {
+                        closeModal();
                         let notif = alertify.error(res.message);
                         $('body').one('click', function() {
                             notif.dismiss();

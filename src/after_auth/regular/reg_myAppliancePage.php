@@ -165,7 +165,7 @@ if (!$sql_result) {
                                     </td>
                                     <td>
                                         <div class="action-container">
-                                            <button>
+                                            <button class="edit-app-btn" value="<?php echo $row['list_id']; ?>">
                                                 <i class="fa-solid fa-pen-to-square fa-xl" style="color: skyblue;"></i>
                                             </button>
                                             <button class="del-app-btn" data-list-id="<?php echo $row['list_id']; ?>">
@@ -254,6 +254,47 @@ if (!$sql_result) {
         </div>
     </div>
 
+    <!-- EDIT MODAL -->
+    <div class="modal" id="edit-modal">
+        <div class="modal-cont">
+            <form id="updateForm" class="modal-body" action="submit.php" method="post">
+                <span class="input-group">
+                    <img src="/src/assets/img/logo-icon-only-1x1.png" id="edit_image" name="image" width="128" height="128">
+                </span>
+                <span class="input-group">
+                    <label for="edit_app_type">App Type:</label>
+                    <input id="edit_app_type" name="app_type" class="ig-inp-2" readonly>
+                </span>
+                <span class="input-group">
+                    <label for="edit_app_brand">App Brand:</label>
+                    <input id="edit_app_brand" name="app_brand" class="ig-inp-2" readonly>
+                </span>
+                <span class="input-group">
+                    <label for="edit_app_model">App Model:</label>
+                    <input id="edit_app_model" name="app_model" class="ig-inp-2" readonly>
+                </span>
+                <span class="input-group">
+
+                </span>
+                <span class="input-group fl-col">
+                    <label for="edit_quantity">Quantity:</label>
+                    <input type="number" class="ig-inp" id="edit_quantity" name="quantity" min="1" max="100" onclick="edit_calculateConsumption()">
+                </span>
+                <span class="input-group fl-col">
+                    <label for="edit_consumption">Consumption:</label>
+                    <input type="text" class="ig-inp" id="edit_consumption" name="consumption" readonly>
+                    <input type="hidden" class="ig-inp" id="edit_orig-consumption" name="orig-consumption" readonly>
+                </span>
+                <!-- hidden input for posting app_id logged_in user-->
+                <input type="hidden" id="app_id_edit" name="app_id" readonly>
+                <input type="hidden" id="list_id_edit" name="list_id_edit" value="">
+                <input type="hidden" id="user_id_edit" name="user_id" value="<?php echo $user_id; ?>" readonly>
+
+                <input type="submit" value="Edit Appliance" class="submit-btn b-sdw">
+            </form>
+        </div>
+    </div>
+
     <style>
         /* Style for the modal container */
         .modal {
@@ -316,6 +357,13 @@ if (!$sql_result) {
             border: 1px solid #31507F;
         }
 
+        .ig-inp-2 {
+            width: 15rem;
+            padding: 8px 1rem;
+            border-radius: 8px;
+            border: 1px solid #31507F;
+        }
+
         .fl-col {
             flex-direction: column;
         }
@@ -368,6 +416,11 @@ if (!$sql_result) {
             justify-content: center;
             align-items: center;
             gap: 10px;
+        }
+
+        .img-round {
+            border-radius: 20%;
+            box-shadow: 0 2px 4px;
         }
     </style>
 
@@ -425,6 +478,8 @@ if (!$sql_result) {
             };
         });
 
+        //edit btn
+        var editModal = document.getElementById('edit-modal');
 
         //modals close on click
         window.onclick = function(event) {
@@ -433,6 +488,8 @@ if (!$sql_result) {
                 resetFormInputs();
             } else if (event.target === delModal) {
                 delModal.style.display = 'none';
+            } else if (event.target === editModal) {
+                editModal.style.display = 'none';
             }
         };
 
@@ -448,6 +505,11 @@ if (!$sql_result) {
         function closeModal() {
             modal.style.display = 'none';
             delModal.style.display = 'none';
+            editModal.style.display = 'none';
+        }
+
+        function openEditModal() {
+            editModal.style.display = 'block';
         }
 
         function resetFormInputs() {
@@ -458,6 +520,8 @@ if (!$sql_result) {
             $('#app_brand').val('');
             $('#app_model').val('');
             $('#del-input').val('');
+            $('#updateForm')[0].reset();
+            $('#edit_image').attr('src', '/src/assets/img/logo-icon-only-1x1.png');
         }
 
         //add modal form handler:
@@ -598,6 +662,15 @@ if (!$sql_result) {
             document.getElementById("consumption").value = calculated; //only updates the consumption input visible to users
         }
 
+        function edit_calculateConsumption() {
+            const quan1 = document.getElementById("edit_quantity");
+            const cons1 = document.getElementById("edit_orig-consumption"); //from hidden input, ensures to use the consumption value from db
+            const quan_value1 = quan1.value;
+            const cons_value1 = cons1.value;
+
+            const calculated1 = quan_value1 * cons_value1;
+            document.getElementById("edit_consumption").value = calculated1; //only updates the consumption input visible to users
+        }
 
         //delete form action:
         $(document).on('submit', '#delForm', function(event) {
@@ -620,6 +693,90 @@ if (!$sql_result) {
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText); // Log any errors
+                }
+            });
+        });
+
+        //edit
+
+        $(document).on('click', '.edit-app-btn', function() {
+            let list_id = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: '../../functions/appliance/edit_app.php?list_id=' + list_id,
+                success: function(response) {
+                    let res = jQuery.parseJSON(response);
+                    alertify.set('notifier', 'position', 'top-center');
+
+                    if (res.status == 200) {
+                        $('#list_id_edit').val(res.data.list_id);
+                        $('#app_id_edit').val(res.data.app_id);
+                        $('#edit_app_type').val(res.data.app_type);
+                        $('#edit_app_brand').val(res.data.app_brand);
+                        $('#edit_app_model').val(res.data.app_model);
+
+                        $('#edit_consumption').val(res.data.consumption);
+                        $('#edit_orig-consumption').val(res.data.consumption);
+                        $('#edit_quantity').val(res.data.quantity);
+
+                        if (res.data.image) {
+                            $('#edit_image').attr('src', 'data:image;base64,' + res.data.image); // Set image source
+                        } else {
+                            $('#edit_image').attr('src', '/src/assets/img/logo-icon-only-1x1.png'); // Set a placeholder image source
+                        }
+                        console.log('List:', res.data.list_id);
+                        // console.log('id:', res.data.app_id);
+                        // console.log('type:', res.data.app_type);
+                        // console.log('brand:', res.data.app_brand);
+                        console.log('model:', res.data.app_model);
+                        // console.log('consumption:', res.data.consumption);
+                        // console.log('quantity:', res.data.quantity);
+
+                        openEditModal();
+                    } else if (res.status == 404) {
+                        let notif = alertify.error(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).on('submit', '#updateForm', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            formData.append("update_app", true);
+
+            $.ajax({
+                type: 'POST',
+                url: '../../functions/appliance/update_add.php',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    let res = jQuery.parseJSON(response);
+                    alertify.set('notifier', 'position', 'top-center');
+
+                    if (res.status == 200) {
+                        let notif = alertify.success(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                        closeModal();
+                        resetFormInputs();
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1500);
+                    } else if (res.status == 500) {
+                        closeModal();
+                        let notif = alertify.error(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                    }
                 }
             });
         });

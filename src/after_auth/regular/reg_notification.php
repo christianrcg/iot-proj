@@ -30,8 +30,7 @@ if ($notif_status) {
 
     <!-- FONT AWESOME ICONS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <script src="../../assets/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 
     <title>HEO | Notifications</title>
 
@@ -77,9 +76,8 @@ if ($notif_status) {
                                         View Details
                                     </button>
                                     <p>|</p>
-                                    <form action="../../functions/server/remove_notifications.php" method="GET" class="rm_form">
-                                        <input type="hidden" name="remove_notif" value="<?php echo $notif_id; ?>">
-                                        <button type="submit" name="remove_notif" class="close-icon">
+                                    <form action="../../functions/server/remove_notifications.php" method="POST" class="rm_form">
+                                        <button type="submit" name="remove_notif" class="deletePostButton close-icon" value="<?php echo $notif_id; ?>">
                                             <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff; cursor: pointer;"></i>
                                         </button>
                                     </form>
@@ -98,6 +96,9 @@ if ($notif_status) {
         </div>
     </div>
 
+    <script src="../../assets/jquery/jquery.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Hide notif-details on page load
@@ -109,12 +110,37 @@ if ($notif_status) {
                 var notifId = $(this).data('id');
                 $("#detailsContainer" + notifId).slideToggle();
             });
+        });
 
-            // Prevent duplicate form submissions
-            $(".rm_form").submit(function(e) {
-                e.preventDefault(); // Prevent the default form submission
-                $(this).unbind('submit').submit();
 
+        $(document).on('click', '.deletePostButton', function(e) {
+            e.preventDefault();
+
+            let notif_id = $(this).val();
+            $.ajax({
+                type: 'POST',
+                url: '../../functions/server/remove_notifications.php',
+                data: {
+                    'delete_notif': true,
+                    'notif_id': notif_id
+                },
+                success: function(response) {
+                    let res = jQuery.parseJSON(response);
+                    alertify.set('notifier', 'position', 'top-center');
+                    if (res.status == 200) {
+                        let notif = alertify.success(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                        window.location.reload();
+
+                    } else if (res.status == 500) {
+                        let notif = alertify.error(res.message);
+                        $('body').one('click', function() {
+                            notif.dismiss();
+                        });
+                    }
+                }
             });
         });
     </script>

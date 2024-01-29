@@ -148,7 +148,7 @@ if (!$sql_result) {
                                         if (!empty($row['image'])) {
                                             echo '<img src="data:image/jpeg;base64,' . $row['image'] . '" alt="Image" width="64" height="64">';
                                         } else {
-                                            echo '<img src="/src/assets/def-img/def-1x1.jpg" alt="No Image">';
+                                            echo '<img src="../../assets/def-img/def-1x1.jpg" alt="No Image">';
                                         }
                                         ?>
                                     </td>
@@ -195,7 +195,7 @@ if (!$sql_result) {
         <div class="modal-cont">
             <form id="appForm" class="modal-body" action="submit.php" method="post">
                 <span class="input-group">
-                    <img src="/src/assets/img/logo-icon-only-1x1.png" id="image" name="image" width="128" height="128">
+                    <img src="../../assets/img/logo-icon-only-1x1.png" id="image" name="image" width="128" height="128">
                 </span>
                 <span class="input-group">
                     <label for="app_type">App Type:</label>
@@ -259,7 +259,7 @@ if (!$sql_result) {
         <div class="modal-cont">
             <form id="updateForm" class="modal-body" action="submit.php" method="post">
                 <span class="input-group">
-                    <img src="/src/assets/img/logo-icon-only-1x1.png" id="edit_image" name="image" width="128" height="128">
+                    <img src="../../assets/img/logo-icon-only-1x1.png" id="edit_image" name="image" width="128" height="128">
                 </span>
                 <span class="input-group">
                     <label for="edit_app_type">App Type:</label>
@@ -424,7 +424,7 @@ if (!$sql_result) {
         }
     </style>
 
-    <script src="/src/assets/jquery/jquery.js"></script>
+    <script src="../../assets/jquery/jquery.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script>
@@ -514,14 +514,14 @@ if (!$sql_result) {
 
         function resetFormInputs() {
             $('#appForm')[0].reset(); // Reset the form fields
-            $('#image').attr('src', '/src/assets/img/logo-icon-only-1x1.png'); // Reset the image source
+            $('#image').attr('src', '../../assets/img/logo-icon-only-1x1.png'); // Reset the image source
             $('#app_id').val('')
             $('#app_type').val('');
             $('#app_brand').val('');
             $('#app_model').val('');
             $('#del-input').val('');
             $('#updateForm')[0].reset();
-            $('#edit_image').attr('src', '/src/assets/img/logo-icon-only-1x1.png');
+            $('#edit_image').attr('src', '../../assets/img/logo-icon-only-1x1.png');
         }
 
         //add modal form handler:
@@ -643,7 +643,7 @@ if (!$sql_result) {
                     if (data.image) {
                         $('#image').attr('src', 'data:image;base64,' + data.image); // Set image source
                     } else {
-                        $('#image').attr('src', '/src/assets/img/logo-icon-only-1x1.png'); // Set a placeholder image source
+                        $('#image').attr('src', '../../assets/img/logo-icon-only-1x1.png'); // Set a placeholder image source
                     }
                 },
                 error: function(xhr, status, error) {
@@ -723,7 +723,7 @@ if (!$sql_result) {
                         if (res.data.image) {
                             $('#edit_image').attr('src', 'data:image;base64,' + res.data.image); // Set image source
                         } else {
-                            $('#edit_image').attr('src', '/src/assets/img/logo-icon-only-1x1.png'); // Set a placeholder image source
+                            $('#edit_image').attr('src', '../../assets/img/logo-icon-only-1x1.png'); // Set a placeholder image source
                         }
                         console.log('List:', res.data.list_id);
                         // console.log('id:', res.data.app_id);

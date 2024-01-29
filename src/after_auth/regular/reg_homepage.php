@@ -2,6 +2,10 @@
 require_once('../../functions/database/db_connect.php');
 session_start();
 include_once '../../components/reg_sidebar.php';
+
+include_once '../../functions/server/getElectricityRate.php';
+$user_id = $_SESSION['user_id'];
+$electricityRate = getElectrictyRate();
 ?>
 
 <!DOCTYPE html>
@@ -14,13 +18,13 @@ include_once '../../components/reg_sidebar.php';
 
     <!-- FONT AWESOME ICONS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>HEO | Dashboard</title>
 </head>
 
 <body>
     <div class="content">
-        <div class="dashboard">
+        <div class="dashboard mb-two">
             <div class="dashboard-text">
                 <h1>Dashboard</h1>
             </div>
@@ -36,24 +40,43 @@ include_once '../../components/reg_sidebar.php';
 
                 <!-- GRAPH -->
 
-                <div class="bar-graph"></div>
+                <?php
+                include_once '../../functions/user/fetchRecords.php';
+                $userRecords = fetchRecords($user_id);
+                ?>
+                <div class="bar-graph">
+                    <canvas id="myChart"></canvas>
+                    <p class="analytics"> Monthly Analytics </p>
+                </div>
 
 
                 <!-- ELECTRICITY RATE -->
+                <?php
+                $test = date('F');
+                $curMon = $test;
 
+                ?>
                 <div class="electricity-rate">
                     <div class="electricity-rate-content">
                         <i class="fa-solid fa-bolt-lightning fa-2xl" style="color: white;"></i>
                         <div class="electricity-rate-text">
-                            <p>Meralco electricity Rate as of November</p>
-                            <h1>₱12 kWh</h1>
+                            <p>Meralco electricity Rate as of <?php echo $curMon; ?></p>
+                            <h1>₱ <?php echo $electricityRate; ?> per kWh</h1>
                         </div>
                     </div>
                 </div>
 
 
                 <!-- MONTHLY CONSUMPTION -->
+                <?php
+                include_once '../../functions/cost/checkUserBudget.php';
 
+                $budget = checkUserBudget($user_id);
+                if ($budget > 0) {
+                    include_once '../../functions/server/exceededBudgetWarning.php';
+                    checkExceededBudget($user_id);
+                }
+                ?>
                 <div class="monthly-consumption">
 
                     <div class="monthly-consumption-text">
@@ -64,10 +87,13 @@ include_once '../../components/reg_sidebar.php';
                     <div class="monthly-consumption-input">
                         <h3>Set monthly budget:</h3>
                         <div class="input-group">
-                            <input type="number" name="budget" placeholder="&#8369;">
-                            <button class="edit-btn" type="submit">
-                                <i class="fa-regular fa-pen-to-square fa-sm" style="color: #ffffff;"></i>
-                            </button>
+                            <form action="../../functions/cost/setBudget.php" method="POST" id="set-budget">
+                                <input type="number" name="budget" placeholder="&#8369;<?php echo $budget; ?>" min="0" step="100">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                <button class="edit-btn" type="submit" form="set-budget">
+                                    <i class="fa-regular fa-pen-to-square fa-sm" style="color: #ffffff;"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -89,14 +115,15 @@ include_once '../../components/reg_sidebar.php';
                 $weather_data = null;
                 if ($latitude !== 'Not Set' && $longitude !== 'Not Set') {
                     $weather_data = getWeatherLocation($latitude, $longitude);
+
+                    //will run if its hot weather and will create a warning notification that will displayed at notifications page.
+                    checkForHotWeather($weather_data['temperature'], $_SESSION['user_id']);
                 }
 
-                //will run if its hot weather and will create a warning notification that will displayed at notifications page.
-                checkForHotWeather($weather_data['temperature'], $_SESSION['user_id']);
                 ?>
                 <div class="address-temperature">
                     <div class="address-temperature-location">
-                        <i class="fa-solid fa-location-dot fa-2xl" style="color: #c80404;"></i>
+                        <i class="fa-solid fa-location-dot fa-3x" style="color: #c80404;"></i>
                         <div class="address-location-text">
                             <h1><?php echo $location_data['place_local'] ?? 'Not Set'; ?></h1>
                             <p><?php echo $location_data['place_name'] ?? 'Not Set'; ?></p>
@@ -106,7 +133,7 @@ include_once '../../components/reg_sidebar.php';
                     <div class="address-temperature-degree">
                         <div class="icon-container">
                             <?php if ($weather_data !== null && isset($weather_data['weather_icon'])) : ?>
-                                <img src="http://openweathermap.org/img/w/<?php echo $weather_data['weather_icon']; ?>.png" alt="weather_icon" style="height: 2rem; width: 2rem;">
+                                <img src="http://openweathermap.org/img/w/<?php echo $weather_data['weather_icon']; ?>.png" alt="weather_icon" height="64" width="auto">
                             <?php else : ?>
                                 <img src="../../assets/img/weatherlogo_32x32.png" alt="weather_icon" style="height: 2rem; width: 2rem;">
                             <?php endif; ?>
@@ -114,10 +141,11 @@ include_once '../../components/reg_sidebar.php';
                         </div>
 
                         <div class="address-temperature-text">
-                            <h1><?php echo isset($weather_data['weather_main']) ? $weather_data['weather_main'] : 'Not Set'; ?></h1>
+                            <p><?php echo isset($weather_data['weather_main']) ? $weather_data['weather_main'] : 'Not Set'; ?></p>
                             <div class="address-temp">
-                                <h1>feels like</h1>
-                                <p><?php echo isset($weather_data['feels_like']) ? round($weather_data['feels_like']) . '°C' : 'Not Set'; ?></p>
+                                <p>feels like </p>
+                                <p><?php echo isset($weather_data['feels_like']) ? round($weather_data['feels_like']) . ' °C' : 'Not Set'; ?></p>
+
                             </div>
                         </div>
                     </div>
@@ -127,7 +155,42 @@ include_once '../../components/reg_sidebar.php';
 
 
                 <!-- ELECTRICITY CONSUMPTION -->
+                <?php
+                include '../../functions/list-consumption/checkuser_in_list.php';
+                $user_id = $_SESSION['user_id'];
+                $check_user_list = check_user_in_list($user_id);
 
+                //varaibles to be displayed
+                $minutely = 0;
+                $hourly = 0;
+                $costPerMinute = 0;
+                $costPerHour = 0;
+                $costPerDay = 0;
+                $costPerMonth = 0;
+
+                if ($check_user_list == 0) {
+                    // use the variables to 0 as stated above
+                } else if ($check_user_list == 1) {
+                    include_once '../../functions/list-consumption/consumptionPipeline.php';
+                    include_once '../../functions/cost/computeCost.php';
+
+                    $allConsumptionDetails = getAllConsumptionDetails($user_id); //fetch in watts
+                    $convertedConsumptionDetails = convertDetailsToKWH($allConsumptionDetails); //fetch in kilowatts
+
+                    foreach ($convertedConsumptionDetails as $detail) {
+                        $minutely = $detail['minutely_consumption'];
+                        $hourly = $detail['hourly_consumption'];
+                        $daily = $detail['daily_consumption'];
+                        $monthly = $detail['monthly_consumption'];
+
+                        $costPerMinute = round(computeCost($minutely), 2);
+                        $costPerHour = round(computeCost($hourly), 2);
+                        $costPerDay = round(computeCost($daily), 2);
+                    }
+                    $costPerMonth = round(computeCost($monthly), 2);
+                    setMonthlyCost($user_id, $costPerMonth);
+                }
+                ?>
                 <div class="electricity-consumption">
                     <div class="electricity-consumption-header">
 
@@ -147,11 +210,11 @@ include_once '../../components/reg_sidebar.php';
                             </div>
                             <div class="per-minute-content">
                                 <div class="watts">
-                                    <h2>51 W</h2>
+                                    <h2><?php echo $minutely; ?> KW</h2>
                                 </div>
                                 <div class="cost">
                                     <h2>Cost: </h2>
-                                    <h2>0.612 PHP</h2>
+                                    <h2>&#8369; <?php echo $costPerMinute; ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -162,11 +225,11 @@ include_once '../../components/reg_sidebar.php';
                             </div>
                             <div class="per-hour-content">
                                 <div class="watts">
-                                    <h2>51 W</h2>
+                                    <h2><?php echo $hourly; ?> KW</h2>
                                 </div>
                                 <div class="cost">
                                     <h2>Cost: </h2>
-                                    <h2>0.612 PHP</h2>
+                                    <h2>&#8369; <?php echo $costPerHour; ?></h2>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +240,7 @@ include_once '../../components/reg_sidebar.php';
                         <p>if continue in the following 24 hours</p>
                         <div class="cost-computed">
                             <h2>Cost: </h2>
-                            <h2 style="margin-left: 5px; font-style:italic;">881 PHP</h2>
+                            <h2 style="margin-left: 5px; font-style:italic;">&#8369; <?php echo $costPerDay; ?></h2>
                         </div>
                     </div>
 
@@ -191,6 +254,33 @@ include_once '../../components/reg_sidebar.php';
 
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        const userRecords = <?php echo json_encode($userRecords); ?>;
+        console.log(userRecords);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Kilowatts',
+                    data: userRecords,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        Chart.defaults.color = '#FFF';
+    </script>
 </body>
 
 </html>

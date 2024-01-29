@@ -75,7 +75,8 @@
                                 'onok': function() {
                                     alertify.success(res.message + ' Redirecting to Login Page');
                                     setTimeout(function() {
-                                        window.location.href = 'loginpage.php';
+                                        // window.location.href = 'loginpage.php';
+                                        window.location.href = 'intermediary.php';
                                     }, 1500);
                                 }
                             });

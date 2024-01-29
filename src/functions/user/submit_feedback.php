@@ -22,11 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Feedback inserted successfully!"; // Debug output
         // Redirect or show a success message
-        header("Location: /iot-proj/src/after_auth/regular/reg_userManual.php"); // Redirect to the user dashboard
+        header("Location: ../../after_auth/regular/reg_userManual.php"); // Redirect to the user dashboard
         exit();
     }
 } else {
     // Handle invalid request method
     echo "Invalid request method";
 }
-

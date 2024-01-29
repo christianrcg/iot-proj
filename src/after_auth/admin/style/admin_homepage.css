@@ -106,17 +106,16 @@ div.content {
     align-items: center;
     width: 70vw;
     justify-content: space-evenly;
-
+    background-color: rgb(16, 26, 70);
 }
 
 .Meralco-rate { 
     grid-area: Meralco-rate;
     border: solid 3px orange;
     border-radius: 20px;
-    background-color: white;
+    background-color: rgb(16, 26, 70);
     align-items: center;
     display: flex;
-
 }
 
 .meralco-rate-input{
